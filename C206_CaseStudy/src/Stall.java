@@ -14,6 +14,7 @@ public class Stall {
 		return ID;
 	}
 
+	
 	public String getName() {
 		return Name;
 	}
