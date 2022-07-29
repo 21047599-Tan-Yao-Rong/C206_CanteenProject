@@ -23,5 +23,4 @@ public class Order {
 		return Price;
 	}
 
-	
 }

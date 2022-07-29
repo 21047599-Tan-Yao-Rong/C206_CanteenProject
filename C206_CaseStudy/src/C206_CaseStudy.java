@@ -17,6 +17,7 @@ public class C206_CaseStudy {
 		Cs.loadStallList();
 		Cs.loadMenuList();
 		Cs.start();
+		
 	}
 	
 	private void loadStallList()
