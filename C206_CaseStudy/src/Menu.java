@@ -3,9 +3,9 @@ public class Menu {
 	
 	private int Number;
 	private String Name;
-	private double Price;
+	private int Price;
 	
-	public Menu(int number, String name, double price) {
+	public Menu(int number, String name, int price) {
 		Number = number;
 		Name = name;
 		Price = price;
@@ -22,6 +22,8 @@ public class Menu {
 	public double getPrice() {
 		return Price;
 	}
+	
+	
 
 	
 }
