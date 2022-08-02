@@ -167,7 +167,23 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
-	
+	private void addFoodItem() { 
+		boolean foodAdded = false;
+		
+		for(int i = 0; i < menuList.size(); i++) {
+			if (menuList.get(i) == null) {
+				String newFoodItem = Helper.readString("Enter name of new food item > ");
+				double price = Helper.readDouble("Enter price of new food item > ");
+				//menuList.add = new Menu(i+1, newFoodItem);
+				foodAdded = true;
+				System.out.println(newFoodItem + " has sucessfully been added");
+				break;
+			}
+		}
+		if (foodAdded == false) {
+			System.out.println("Food Item is not added!");
+		}
+	}
 	private String addOrder(int foodNumber)
 	{
 		boolean isAdd = false;
@@ -227,5 +243,5 @@ public class C206_CaseStudy {
 	{
 		
 	}
-
+	
 }
