@@ -32,9 +32,8 @@ public class C206_CaseStudy {
 		//stallList.add(new Stall("S5", "Korean Cuisine", LocalDate.of(2016, 8, 14)));
 	}
 	
-	private void loadMenuList()
-	{
-	
+	private void loadMenuList() {
+		
 		menuList.add(new Menu(001,"Chicken Rice",3));
 		menuList.add(new Menu(002,"Bolognese Spaghetti",2));
 		menuList.add(new Menu(003,"Fish and Chips",3));
@@ -173,8 +172,8 @@ public class C206_CaseStudy {
 		for(int i = 0; i < menuList.size(); i++) {
 			if (menuList.get(i) == null) {
 				String newFoodItem = Helper.readString("Enter name of new food item > ");
-				double price = Helper.readDouble("Enter price of new food item > ");
-				//menuList.add = new Menu(i+1, newFoodItem);
+				int price = Helper.readInt("Enter price of new food item > ");
+				menuList.add(new Menu(i+1, newFoodItem, price));
 				foodAdded = true;
 				System.out.println(newFoodItem + " has sucessfully been added");
 				break;
@@ -183,6 +182,9 @@ public class C206_CaseStudy {
 		if (foodAdded == false) {
 			System.out.println("Food Item is not added!");
 		}
+	}
+	private void deleteFoodItem() {
+		
 	}
 	private String addOrder(int foodNumber)
 	{
