@@ -50,7 +50,14 @@ public class C206_CaseStudy {
 		System.out.println("Option 5: Quit");
 		Helper.line(50, "=");
 	}
-	
+	private void CanteenAdminFoodMenu() { 
+		Helper.line(50, "=");
+		System.out.println("Option 1: View all food items");
+		System.out.println("Option 1: Add new food items");
+		System.out.println("Option 1: Delete food item");
+		System.out.println("Option 1: Change food items price");
+		Helper.line(50, "=");
+	}
 	
 	private void start()
 	{
@@ -81,6 +88,29 @@ public class C206_CaseStudy {
 		System.out.println("Bye bye");
 		
 	}
+	/*private void start() { 
+		CanteenAdminFoodMenu();
+		int option = Helper.readInt("Enter option number > ");
+		while(option != 5) { 
+			if (option == 1) {
+				viewMenu();
+			}
+			else if (option == 2) {
+				addFoodItem();
+			}
+			else if(option == 3) {
+				deleteFoodItem();
+			}
+			else if(option == 4) {
+				changePrice();
+			}
+			else {
+				System.out.println("Invaild option");
+			}
+			CanteenAdminFoodMenu();
+			option = Helper.readInt("Enter option number > ");
+		}
+	}*/
 	
 //  CUSTOMER CODE====================================================================
 	
