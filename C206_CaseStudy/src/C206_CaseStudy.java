@@ -14,6 +14,9 @@ public class C206_CaseStudy {
 //	creating the orderList arraylist
 	private ArrayList<Order> orderList = new ArrayList<Order>();
 	
+// creating ingrediant orderList arraylist
+	private ArrayList<IngrediantOrder> IngrediantOrderList = new ArrayList<Order>();
+	
 	public static void main(String[] args) 
 	{
 		C206_CaseStudy Cs = new C206_CaseStudy();
@@ -291,6 +294,58 @@ public class C206_CaseStudy {
 	private void placeOrder()
 	{
 		
+	}
+	private void AddIngredientOrder()
+	{
+		boolean isAdd = false;
+		String Message = "Order was not added successfully.";
+		
+		for(Order O : IngrediantOrderList)
+		{
+			if(O.getNumber() == ingrediantNumber)
+			{
+				orderList.add(new Order(ingrediantNumber, O.getName(), O.getPrice()));
+				isAdd = true;
+			}
+		}
+		
+		if(isAdd == true)
+		{
+			Message = "Order was added successfully.";
+		}
+		
+		return Message;
+		
+	}
+	private void viewIngrediantOrder()
+	{
+		String output = "";
+		output += String.format("%-20s%-20s%s\n", "ORDER NUMBER", "INGREDIANT NAME", "ORDER PRICE");
+		for(int i =0;i<10; i++) {
+			if (IngrediantOrderList[i] != null) {
+				output += String.format("%-20s%-20s%s\n", IngrediantOrderList[i].getNumber(), IngrediantOrderList[i].getName(), IngrediantOrderList[i].getPrice());
+			}
+
+		}
+		System.out.println(output);
+	}
+	private void deleteIngrediantOrder() {
+		viewIngrediantOrder();
+		boolean isDeleted = false;
+		String Message = "Order was not deleted.";
+		String OrderID = Helper.readString("Enter ID of Order to delete > ");
+		for(int i = 0;i<10;i++) {
+			if ((IngrediantOrderList[i] != null) && (IngrediantOrderList[i].getID().equalsIgnoreCase(OrderID))) {
+				IngrediantOrderList[i] = null;
+				isDeleted == true;
+			}
+		}
+		if(isDeleted == true)
+		{
+			Message = "Order was deleted successfully.";
+		}
+		
+		return Message;
 	}
 	
 }
