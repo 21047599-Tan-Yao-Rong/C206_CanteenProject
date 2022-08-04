@@ -34,11 +34,11 @@ public class C206_CaseStudy {
 	
 	private void loadMenuList() {
 		
-		menuList.add(new Menu(001,"Chicken Rice",3));
-		menuList.add(new Menu(002,"Bolognese Spaghetti",2));
-		menuList.add(new Menu(003,"Fish and Chips",3));
-		menuList.add(new Menu(004,"Kimchi Fried Rice",4));
-		menuList.add(new Menu(005,"Soda Drinks",2));
+		menuList.add(new Menu(001,"Chicken Rice",5));
+		menuList.add(new Menu(002,"Bolognese Spaghetti",3));
+		menuList.add(new Menu(003,"Fish and Chips",5));
+		menuList.add(new Menu(004,"Kimchi Fried Rice",6));
+		menuList.add(new Menu(005,"Soda Drinks",3));
 	}
 	
 	private void CanteenAdminMenu() {
@@ -184,7 +184,24 @@ public class C206_CaseStudy {
 		}
 	}
 	private void deleteFoodItem() {
-		
+		viewMenu(); 
+		int foodNum = Helper.readInt("Enter food number to delete > ");
+		for (int i = 0; i < menuList.size(); i++) { 
+			if (i == foodNum) { 
+				menuList.remove(foodNum);
+			}
+		}
+	}
+	private void changePrice() { 
+		viewMenu();
+		int foodNum = Helper.readInt("Enter food number to change price > ");
+		int newPrice = Helper.readInt("Enter new price for food item > ");
+		for (int i = 0; i < menuList.size(); i++) { 
+			if (i == foodNum || newPrice < 15 || newPrice > 3) { 
+				menuList.get(foodNum).setPrice(newPrice);
+				System.out.println("Price successfully updated.");
+			}
+		}
 	}
 	private String addOrder(int foodNumber)
 	{

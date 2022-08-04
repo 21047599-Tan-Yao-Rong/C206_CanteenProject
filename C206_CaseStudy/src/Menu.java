@@ -19,8 +19,11 @@ public class Menu {
 		return Name;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return Price;
+	}
+	public void setPrice(int Price) {
+		this.Price = Price;
 	}
 	
 	
