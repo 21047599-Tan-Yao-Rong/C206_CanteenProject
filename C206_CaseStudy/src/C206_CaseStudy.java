@@ -11,12 +11,10 @@ public class C206_CaseStudy {
 //  creating the menuList arrayist
 	private ArrayList<Menu> menuList = new ArrayList<Menu>();
 	
-//	creating the orderList arraylist
-	private Order[] orderList = new Order[10];
-	
 // creating ingrediant orderList arraylist
 	private ArrayList<Order> IngrediantOrderList = new ArrayList<Order>();
-	
+
+//  creating cart to add orders into for customer
 	private ArrayList<Cart> cart = new ArrayList<Cart>();
 	
 	public static void main(String[] args) 
