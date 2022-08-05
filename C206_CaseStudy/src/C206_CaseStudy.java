@@ -341,7 +341,8 @@ public class C206_CaseStudy {
 			if (menuList.get(i) == null) {
 				String newFoodItem = Helper.readString("Enter name of new food item > ");
 				int price = Helper.readInt("Enter price of new food item > ");
-				menuList.add(new Menu(i+1, newFoodItem, price));
+				String stallID = Helper.readString("Enter stall ID of new food item > ");
+				menuList.add(new Menu(i+1, stallID, newFoodItem, price));
 				foodAdded = true;
 				System.out.println(newFoodItem + " has sucessfully been added");
 				break;
