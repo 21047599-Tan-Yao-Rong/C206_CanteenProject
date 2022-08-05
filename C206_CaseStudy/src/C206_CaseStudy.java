@@ -61,6 +61,13 @@ public class C206_CaseStudy {
 		System.out.println("Option 1: Change food items price");
 		Helper.line(50, "=");
 	}
+	private void StallOperatorMenu() { 
+		Helper.line(50, "=");
+		System.out.println("Option 1: View all Ingrediant Orders");
+		System.out.println("Option 2: Add new Ingrediant Order");
+		System.out.println("Option 3: Delete Ingrediant Order");
+		Helper.line(50, "=");
+	}
 	
 	private void start()
 	{
@@ -293,8 +300,33 @@ public class C206_CaseStudy {
 	
 	private void placeOrder()
 	{
+	}
+	}
+//Stall operator Code-----------------------------------------------------------------------------------------------
+
+/*private void start() { 
+StallOperatorMenu()
+int option = Helper.readInt("Enter option number > ");
+while(option != 5) { 
+	if (option == 1) {
+		viewIngrediantOrder()
+	}
+	else if (option == 2) {
+		AddIngredientOrder()
+	}
+	else if(option == 3) {
+		DeleteIngrediantOrder()
+	}
+	else if(option == 4) {
 		
 	}
+	else {
+		System.out.println("Invaild option");
+	}
+	StallOperatorMenu()
+	option = Helper.readInt("Enter option number > ");
+}
+}*/
 	private void AddIngredientOrder()
 	{
 		boolean isAdd = false;
