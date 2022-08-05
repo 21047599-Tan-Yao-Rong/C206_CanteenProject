@@ -206,6 +206,8 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
+	
+
 	private void addFoodItem() { 
 		boolean foodAdded = false;
 		
@@ -232,6 +234,8 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	
+	
 	private void changePrice() { 
 		viewMenu();
 		int foodNum = Helper.readInt("Enter food number to change price > ");
@@ -301,7 +305,7 @@ public class C206_CaseStudy {
 	private void placeOrder()
 	{
 	}
-	}
+	
 //Stall operator Code-----------------------------------------------------------------------------------------------
 
 /*private void start() { 
@@ -327,14 +331,14 @@ while(option != 5) {
 	option = Helper.readInt("Enter option number > ");
 }
 }*/
-	private void AddIngredientOrder()
+	private String AddIngredientOrder()
 	{
 		boolean isAdd = false;
 		String Message = "Order was not added successfully.";
-		int IngrediantAmount = Helper.readint("Enter amount of ingrediant");
+		int IngrediantAmount = Helper.readInt("Enter amount of ingrediant");
 		String Name = Helper.readString("Enter ingrediant Name");
 		double getPrice = Helper.readDouble("Enter ingrediant price");
-			orderList.add(new Order(ingrediantAmount, Name, getPrice);
+			orderList.add(new Order(IngrediantAmount, Name, getPrice));
 				isAdd = true;
 			
 		
@@ -352,22 +356,24 @@ while(option != 5) {
 		String output = "";
 		output += String.format("%-20s%-20s%s\n", "ORDER NUMBER", "INGREDIANT NAME", "ORDER PRICE");
 		for(int i =0;i<10; i++) {
-			if (IngrediantOrderList[i] != null) {
-				output += String.format("%-20s%-20s%s\n", IngrediantOrderList[i].getNumber(), IngrediantOrderList[i].getName(), IngrediantOrderList[i].getPrice());
+			if (IngrediantOrderList.get(i) != null) {
+				output += String.format("%-20s%-20s%s\n", IngrediantOrderList.get(i).getNumber(), IngrediantOrderList.get(i).getName(), IngrediantOrderList.get(i).getPrice());
 			}
 
 		}
 		System.out.println(output);
 	}
-	private void deleteIngrediantOrder() {
+	private String deleteIngrediantOrder() {
+		
 		viewIngrediantOrder();
 		boolean isDeleted = false;
 		String Message = "Order was not deleted.";
-		String OrderID = Helper.readString("Enter ID of Order to delete > ");
+		int OrderID = Helper.readInt("Enter ID of Order to delete > ");
 		for(int i = 0;i<10;i++) {
-			if ((IngrediantOrderList[i] != null) && (IngrediantOrderList[i].getID().equalsIgnoreCase(OrderID))) {
-				IngrediantOrderList[i] = null;
-				isDeleted == true;
+			if ((IngrediantOrderList.get(i) != null) && (IngrediantOrderList.get(i).getNumber() == OrderID)) 
+			{
+				IngrediantOrderList.remove(i);
+				isDeleted = true;
 			}
 		}
 		if(isDeleted == true)
