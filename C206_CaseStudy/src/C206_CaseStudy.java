@@ -15,7 +15,7 @@ public class C206_CaseStudy {
 	private ArrayList<Order> orderList = new ArrayList<Order>();
 	
 // creating ingrediant orderList arraylist
-	private ArrayList<IngrediantOrder> IngrediantOrderList = new ArrayList<Order>();
+	private ArrayList<Order> IngrediantOrderList = new ArrayList<Order>();
 	
 	public static void main(String[] args) 
 	{
@@ -331,15 +331,13 @@ while(option != 5) {
 	{
 		boolean isAdd = false;
 		String Message = "Order was not added successfully.";
-		
-		for(Order O : IngrediantOrderList)
-		{
-			if(O.getNumber() == ingrediantNumber)
-			{
-				orderList.add(new Order(ingrediantNumber, O.getName(), O.getPrice()));
+		int IngrediantAmount = Helper.readint("Enter amount of ingrediant");
+		String Name = Helper.readString("Enter ingrediant Name");
+		double getPrice = Helper.readDouble("Enter ingrediant price");
+			orderList.add(new Order(ingrediantAmount, Name, getPrice);
 				isAdd = true;
-			}
-		}
+			
+		
 		
 		if(isAdd == true)
 		{
