@@ -34,6 +34,10 @@ public class C206_CaseStudy {
 		//stallList.add(new Stall("S4", "Japanese Cuisine", LocalDate.of(2023, 7, 13)));
 		//stallList.add(new Stall("S5", "Korean Cuisine", LocalDate.of(2016, 8, 14)));
 	}
+	private void loadIngrediantOrders() 
+	{
+		IngrediantOrderList.add(new Order(1,"Chicken",20));
+	}
 	
 	private void loadMenuList() {
 		
@@ -388,9 +392,6 @@ while(option != 5) {
 	else if(option == 3) {
 		DeleteIngrediantOrder()
 	}
-	else if(option == 4) {
-		
-	}
 	else {
 		System.out.println("Invaild option");
 	}
@@ -402,10 +403,10 @@ while(option != 5) {
 	{
 		boolean isAdd = false;
 		String Message = "Order was not added successfully.";
-		int IngrediantAmount = Helper.readInt("Enter amount of ingrediant");
+		int OrderID = Helper.readInt("Enter amount of ingrediant");
 		String Name = Helper.readString("Enter ingrediant Name");
 		double getPrice = Helper.readDouble("Enter ingrediant price");
-			orderList.add(new Order(IngrediantAmount, Name, getPrice));
+			IngrediantOrderList.add(new Order(OrderID, Name, getPrice));
 				isAdd = true;
 			
 		
@@ -422,9 +423,9 @@ while(option != 5) {
 	{
 		String output = "";
 		output += String.format("%-20s%-20s%s\n", "ORDER NUMBER", "INGREDIANT NAME", "ORDER PRICE");
-		for(int i =0;i<10; i++) {
+		for(int i = 0; i < IngrediantOrderList.size(); i++) {
 			if (IngrediantOrderList.get(i) != null) {
-				output += String.format("%-20s%-20s%s\n", IngrediantOrderList.get(i).getNumber(), IngrediantOrderList.get(i).getName(), IngrediantOrderList.get(i).getPrice());
+				output += String.format("%-20s%-20s%s\n", IngrediantOrderList.get(i).getOrderID(), IngrediantOrderList.get(i).getName(), IngrediantOrderList.get(i).getPrice());
 			}
 
 		}
@@ -436,8 +437,8 @@ while(option != 5) {
 		boolean isDeleted = false;
 		String Message = "Order was not deleted.";
 		int OrderID = Helper.readInt("Enter ID of Order to delete > ");
-		for(int i = 0;i<10;i++) {
-			if ((IngrediantOrderList.get(i) != null) && (IngrediantOrderList.get(i).getNumber() == OrderID)) 
+		for(int i = 0; i < IngrediantOrderList.size(); i++) {
+			if ((IngrediantOrderList.get(i) != null) && (IngrediantOrderList.get(i).getOrderID() == OrderID)) 
 			{
 				IngrediantOrderList.remove(i);
 				isDeleted = true;
