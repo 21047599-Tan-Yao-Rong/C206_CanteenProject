@@ -176,7 +176,8 @@ public class C206_CaseStudy {
 			}
 			else if(option == 5) 
 			{
-				// delete
+				int FoodNumber = inputFoodNumber();
+				C206_CaseStudy.deleteOrder(cart, FoodNumber);
 			}
 			else {
 				System.out.println("Invaild option");	
@@ -217,30 +218,6 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
-//	private String addOrder()
-//	{
-//		boolean isAdd = false;
-//		String Message = "Order was not added successfully.";
-//		
-//		int foodNumber = Helper.readInt("Enter food Number > ");
-//		
-//		for(Menu M : menuList)
-//		{
-//			if(M.getNumber() == foodNumber)
-//			{
-//				cart.add(new Cart(foodNumber, M.getName(), M.getPrice()));
-//				isAdd = true;
-//			}
-//		}
-//		
-//		if(isAdd == true)
-//		{
-//			Message = "Order was added successfully.";
-//		}
-//		
-//		return Message;
-//	}
-	
 	public static Cart inputOrder() {
 		int foodNumber = Helper.readInt("Enter food Number > ");
 		String name = Helper.readString("Enter name > ");
@@ -253,33 +230,26 @@ public class C206_CaseStudy {
 	
 	public static void addOrder(ArrayList<Cart> cart, Cart order) {
 		cart.add(order);
-		
+		System.out.println("Order added.");
 	}
 	
-//	private String deleteOrder()
-//	{
-//		boolean isDeleted = false;
-//		String Message = "Order was not deleted.";
-//		
-//		int foodNumber = Helper.readInt("Enter the food number to delete > ");
-//		
-//		for(int O = 0;O < cart.size();O++)
-//		{
-//			if(cart.get(O).getNumber() == foodNumber)
-//			{
-//				cart.remove(O);
-//				isDeleted = true;
-//			}
-//		}
-//		
-//		if(isDeleted == true)
-//		{
-//			Message = "Order was deleted successfully.";
-//		}
-//		
-//		return Message;
-//	}
 	
+	public static int inputFoodNumber() {
+		int foodNumber = Helper.readInt("Enter the food Number you want to delete > ");
+		
+		return foodNumber;
+	}
+	
+	public static void deleteOrder(ArrayList<Cart> cart, int foodNumber) {
+		for (int i = 0; i < cart.size(); i++) 
+		{
+			if(cart.get(i).getNumber() == foodNumber)
+			{
+				cart.remove(i);
+			}
+		}
+		System.out.println("Order delete.");
+	}
 	
 	
 	public static String retrieveAllOrders(ArrayList<Cart> cart)

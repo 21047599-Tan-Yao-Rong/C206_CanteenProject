@@ -10,7 +10,7 @@ public class Cart {
 	
 	private int Number;
 	private String Name;
-	private double Price;
+	private int Price;
 	
 	public Cart(int number, String name, int price) {
 		Number = number;
@@ -26,7 +26,7 @@ public class Cart {
 		return Name;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return Price;
 	}
 

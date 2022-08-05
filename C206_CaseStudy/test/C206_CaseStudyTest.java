@@ -57,19 +57,19 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testAddOrder() 
 	{
-		// Item list is not null, so that can add a new item - boundary
+		// Orders list is not null, so that can add a new item - boundary
 		assertNotNull("Check if there is Order arraylist to add to", cart);
 		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
-		//The item just added is as same as the first item of the list
+		//The order just added is as same as the first item of the list
 		C206_CaseStudy.addOrder(cart, order1);
 		assertEquals("Check that Order arraylist size is 1", 1, cart.size());
 		assertSame("Check that Order is added", order1, cart.get(0));
 				
-		//Add another item. test The size of the list is 2? -normal
-		//The item just added is as same as the second item of the list
+		//Add another order. test The size of the list is 2? -normal
+		//The order just added is as same as the second item of the list
 		C206_CaseStudy.addOrder(cart, order2);
 		assertEquals("Check that Order arraylist size is 2", 2, cart.size());
-		assertSame("Check that Order is added", cart, cart.get(1));
+		assertSame("Check that Order is added", order2, cart.get(1));
 	}
 	
 	@Test
@@ -78,9 +78,45 @@ public class C206_CaseStudyTest {
 		// Item list is not null, so that can add a new item - boundary
 		assertNotNull("Check if there is Order arraylist to delete from", cart);
 		
+		//adding one orders into the arraylist
+		C206_CaseStudy.addOrder(cart, order1);
+		assertEquals("Test if that Camcorder arraylist size is 1?", 1, cart.size());
 		
+		// deleting the order from the arraylist
+		C206_CaseStudy.deleteOrder(cart, 001);
+		assertNotEquals("Test if that Camcorder arraylist size is not 1", 1, cart.size());
 		
+		boolean exist = false;
+		for(Cart C : cart)
+		{
+			if(C.getNumber() == 001)
+			{
+				exist = true;
+			}
+		}
 		
+		assertFalse(exist);
+	
+		
+		//adding two orders into the arraylist
+		C206_CaseStudy.addOrder(cart, order1);
+		C206_CaseStudy.addOrder(cart, order2);
+		assertEquals("Test if that Camcorder arraylist size is 2?", 2, cart.size());
+		
+		// deleting the order from the arraylist
+		C206_CaseStudy.deleteOrder(cart, 001);
+		assertNotEquals("Test if that Camcorder arraylist size is not 2", 2, cart.size());
+		
+		exist = false;
+		for(Cart C : cart)
+		{
+			if(C.getNumber() == 001)
+			{
+				exist = true;
+			}
+		}
+		
+		assertFalse(exist);
 	}
 	
 	@Test
@@ -89,7 +125,7 @@ public class C206_CaseStudyTest {
 		// Test if cart list is not null but empty, so that can add a new item
 		assertNotNull("Test if there is valid cart arraylist to add to", cart);
 		
-		//test if the list of camcorders retrieved from the SourceCentre is empty
+		//test if the list of Orders retrieved from the SourceCentre is empty
 		String allOrders = C206_CaseStudy.retrieveAllOrders(cart);
 		String testOutput = "";
 		assertEquals("Check that viewAllOrders", testOutput, allOrders);
@@ -99,11 +135,11 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addOrder(cart, order2);
 		assertEquals("Test if that Camcorder arraylist size is 2?", 2, cart.size());
 		
-		//test if the expected output string same as the list of camcorders retrieved from the SourceCentre
+		//test if the expected output string same as the list of Orders retrieved from the SourceCentre
 		allOrders = C206_CaseStudy.retrieveAllOrders(cart);
 		
-		testOutput = String.format("%-10d%-20s%d\n", 1,"Chicken Rice", 5);
-		testOutput += String.format("%-10d%-20s%d\n", 2, "chicken cultlet",6);
+		testOutput = String.format("%-10d %-20s %-20d\n", 1,"Chicken Rice", 5);
+		testOutput += String.format("%-10d %-20s %-20d\n", 2, "chicken cultlet",6);
 			
 		assertEquals("Check that viewAllOrders", testOutput, allOrders);
 		
