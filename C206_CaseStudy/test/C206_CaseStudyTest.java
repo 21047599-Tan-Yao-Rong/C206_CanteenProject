@@ -30,10 +30,6 @@ public class C206_CaseStudyTest {
 //  creating cart to add orders into for customer
 	private ArrayList<Cart> cart;
 
-	public C206_CaseStudyTest() 
-	{
-		super();
-	}
 	
 	@Before
 	public void setUp() throws Exception 
