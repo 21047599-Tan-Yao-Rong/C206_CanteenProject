@@ -22,7 +22,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
 		Cs.loadMenuList();
-		Cs.cutomerStart();
+		Cs.start();
 	}
 	
 	private void loadStallList()
@@ -37,11 +37,11 @@ public class C206_CaseStudy {
 	
 	private void loadMenuList() {
 		
-		menuList.add(new Menu(001,"Chicken Rice",5));
-		menuList.add(new Menu(002,"Bolognese Spaghetti",3));
-		menuList.add(new Menu(003,"Fish and Chips",5));
-		menuList.add(new Menu(004,"Kimchi Fried Rice",6));
-		menuList.add(new Menu(005,"Soda Drinks",3));
+		menuList.add(new Menu(001, "S1", "Chicken Rice",5));
+		menuList.add(new Menu(002,"S2", "Bolognese Spaghetti",3));
+		menuList.add(new Menu(003, "S3", "Fish and Chips",5));
+		menuList.add(new Menu(004, "S4", "Kimchi Fried Rice",6));
+		menuList.add(new Menu(005,"S5", "Soda Drinks",3));
 	}
 	
 	private void CustomerMenu()
@@ -74,35 +74,35 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 	}
 	
-//	private void start()
-//	{
-//		CanteenAdminMenu();
-//		int option = Helper.readInt("Enter your option > ");
-//		while(option != 5) {
-//			if (option == 1) {
-//				viewStalls();
-//			}
-//			else if (option == 2) {
-//				addNewStalls();
-//			}
-//			else if(option == 3) {
-//				changeStall();
-//			}
-//			else if(option == 4) {
-//				deleteStall();
-//			}
-//			else {
-//				System.out.println("Invaild option");
-//			}
-//			CanteenAdminMenu();
-//			option = Helper.readInt("Enter your option > ");
-//		}
-//		
-//		
-//		
-//		System.out.println("Bye bye");
-//		
-//	}
+	private void start()
+	{
+		CanteenAdminMenu();
+		int option = Helper.readInt("Enter your option > ");
+		while(option != 5) {
+			if (option == 1) {
+				viewStalls();
+			}
+			else if (option == 2) {
+				addNewStalls();
+			}
+			else if(option == 3) {
+				changeStall();
+			}
+			else if(option == 4) {
+				deleteStall();
+			}
+			else {
+				System.out.println("Invaild option");
+			}
+			CanteenAdminMenu();
+			option = Helper.readInt("Enter your option > ");
+		}
+		
+		
+		
+		System.out.println("Bye bye");
+		
+	}
 	/*private void start() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
@@ -129,30 +129,31 @@ public class C206_CaseStudy {
 	
 //  CUSTOMER CODE====================================================================
 	
-	private void cutomerStart() { 
-		CanteenAdminFoodMenu();
-		int option = Helper.readInt("Enter option number > ");
-		while(option != 5) { 
-			if (option == 1) {
-				viewStalls();
-			}
-			else if (option == 2) {
-				viewMenu();
-			}
-			else if(option == 3) {
-				deleteFoodItem();
-			}
-			else if(option == 4) {
-				changePrice();
-			}
-			else {
-				System.out.println("Invaild option");
-			}
-			CanteenAdminFoodMenu();
-			option = Helper.readInt("Enter option number > ");
-		}
-		System.out.println("Bye");
-	}
+//	private void cutomerStart() { 
+//		CanteenAdminFoodMenu();
+//		int option = Helper.readInt("Enter option number > ");
+//		while(option != 5) { 
+//			if (option == 1) {
+//				viewStalls();
+//			}
+//			else if (option == 2) {
+//				viewMenu();
+//			}
+//			else if(option == 3) {
+//				deleteFoodItem();
+//			}
+//			else if(option == 4) {
+//				changePrice();
+//			}
+//			else {
+//				System.out.println("Invaild option");
+//			}
+//			CanteenAdminFoodMenu();
+//			option = Helper.readInt("Enter option number > ");
+//		}
+//		System.out.println("Bye");
+//	}
+	
 	private void viewStalls()
 	{
 		String output = "";

@@ -39,4 +39,7 @@ public class Stall {
 		this.OperationDate = OperationDate;
 	}
 	
+
+	
+	
 }

@@ -4,11 +4,13 @@ public class Menu {
 	private int Number;
 	private String Name;
 	private int Price;
+	private String stallID;
 	
-	public Menu(int number, String name, int price) {
+	public Menu(int number, String stallID, String name, int price) {
 		Number = number;
 		Name = name;
 		Price = price;
+		this.stallID = stallID;
 	}
 
 	public int getNumber() {
