@@ -27,6 +27,10 @@ public class Menu {
 	public void setPrice(int Price) {
 		this.Price = Price;
 	}
+
+	public String getStallID() {
+		return stallID;
+	}
 	
 	
 

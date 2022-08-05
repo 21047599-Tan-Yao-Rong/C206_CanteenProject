@@ -12,17 +12,19 @@ public class C206_CaseStudy {
 	private ArrayList<Menu> menuList = new ArrayList<Menu>();
 	
 //	creating the orderList arraylist
-	private ArrayList<Order> orderList = new ArrayList<Order>();
+	private Order[] orderList = new Order[10];
 	
 // creating ingrediant orderList arraylist
 	private ArrayList<Order> IngrediantOrderList = new ArrayList<Order>();
+	
+	private ArrayList<Cart> cart = new ArrayList<Cart>();
 	
 	public static void main(String[] args) 
 	{
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
 		Cs.loadMenuList();
-		Cs.start();
+		Cs.cutomerStart();
 	}
 	
 	private void loadStallList()
@@ -37,7 +39,7 @@ public class C206_CaseStudy {
 	
 	private void loadMenuList() {
 		
-		menuList.add(new Menu(001, "S1", "Chicken Rice",5));
+		menuList.add(new Menu(001,"S1", "Chicken Rice",5));
 		menuList.add(new Menu(002,"S2", "Bolognese Spaghetti",3));
 		menuList.add(new Menu(003, "S3", "Fish and Chips",5));
 		menuList.add(new Menu(004, "S4", "Kimchi Fried Rice",6));
@@ -46,7 +48,14 @@ public class C206_CaseStudy {
 	
 	private void CustomerMenu()
 	{
-		
+		Helper.line(50, "=");
+		System.out.println("Option 1: View all stalls");
+		System.out.println("Option 2: View Menu");
+		System.out.println("Option 3: Add orders");
+		System.out.println("Option 4: View orders ");
+		System.out.println("Option 5: Delete orders ");
+		System.out.println("Option 6: Quit");
+		Helper.line(50, "=");
 	}
 	
 	private void CanteenAdminMenu() {
@@ -74,35 +83,35 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 	}
 	
-	private void start()
-	{
-		CanteenAdminMenu();
-		int option = Helper.readInt("Enter your option > ");
-		while(option != 5) {
-			if (option == 1) {
-				viewStalls();
-			}
-			else if (option == 2) {
-				addNewStalls();
-			}
-			else if(option == 3) {
-				changeStall();
-			}
-			else if(option == 4) {
-				deleteStall();
-			}
-			else {
-				System.out.println("Invaild option");
-			}
-			CanteenAdminMenu();
-			option = Helper.readInt("Enter your option > ");
-		}
-		
-		
-		
-		System.out.println("Bye bye");
-		
-	}
+//	private void start()
+//	{
+//		CanteenAdminMenu();
+//		int option = Helper.readInt("Enter your option > ");
+//		while(option != 5) {
+//			if (option == 1) {
+//				viewStalls();
+//			}
+//			else if (option == 2) {
+//				addNewStalls();
+//			}
+//			else if(option == 3) {
+//				changeStall();
+//			}
+//			else if(option == 4) {
+//				deleteStall();
+//			}
+//			else {
+//				System.out.println("Invaild option");
+//			}
+//			CanteenAdminMenu();
+//			option = Helper.readInt("Enter your option > ");
+//		}
+//		
+//		
+//		
+//		System.out.println("Bye bye");
+//		
+//	}
 	/*private void start() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
@@ -129,30 +138,39 @@ public class C206_CaseStudy {
 	
 //  CUSTOMER CODE====================================================================
 	
-//	private void cutomerStart() { 
-//		CanteenAdminFoodMenu();
-//		int option = Helper.readInt("Enter option number > ");
-//		while(option != 5) { 
-//			if (option == 1) {
-//				viewStalls();
-//			}
-//			else if (option == 2) {
-//				viewMenu();
-//			}
-//			else if(option == 3) {
-//				deleteFoodItem();
-//			}
-//			else if(option == 4) {
-//				changePrice();
-//			}
-//			else {
-//				System.out.println("Invaild option");
-//			}
-//			CanteenAdminFoodMenu();
-//			option = Helper.readInt("Enter option number > ");
-//		}
-//		System.out.println("Bye");
-//	}
+	private void cutomerStart() { 
+		CustomerMenu();
+		int option = Helper.readInt("Enter option number > ");
+		while(option != 6) 
+		{ 
+			if (option == 1) 
+			{
+				viewStalls();
+			}
+			else if (option == 2) 
+			{
+				viewMenu();
+			}
+			else if(option == 3) 
+			{
+				System.out.println(addOrder());
+			}
+			else if(option == 4) 
+			{
+				viewOrders();
+			}
+			else if(option == 5) 
+			{
+				System.out.println(deleteOrder());
+			}
+			else {
+				System.out.println("Invaild option");	
+			}
+			CustomerMenu();
+			option = Helper.readInt("Enter option number > ");
+		}
+		System.out.println("Bye");
+	}
 	
 	private void viewStalls()
 	{
@@ -169,12 +187,18 @@ public class C206_CaseStudy {
 	
 	private void viewMenu()
 	{
+		String ID = Helper.readString("Enter the stall ID > ");
 		String output = "";
 		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
 		for(Menu M : menuList)
 		{
-			output += String.format("%-20s%-20s%.2f\n", M.getNumber(), M.getName(), M.getPrice());
+			if(ID.equals(M.getStallID()))
+			{
+				output += String.format("%-20s%-20s%d\n", M.getNumber(), M.getName(), M.getPrice());
+			}
+			
 		}
+		
 		System.out.println(output);
 	}
 	
@@ -182,13 +206,14 @@ public class C206_CaseStudy {
 	{
 		boolean isAdd = false;
 		String Message = "Order was not added successfully.";
-		int foodNumber = Helper.readInt("Enter food");
+		
+		int foodNumber = Helper.readInt("Enter food Number > ");
 		
 		for(Menu M : menuList)
 		{
 			if(M.getNumber() == foodNumber)
 			{
-				orderList.add(new Order(foodNumber, M.getName(), M.getPrice()));
+				cart.add(new Cart(foodNumber, M.getName(), M.getPrice()));
 				isAdd = true;
 			}
 		}
@@ -201,16 +226,18 @@ public class C206_CaseStudy {
 		return Message;
 	}
 	
-	private String deleteOrder(int foodNumber)
+	private String deleteOrder()
 	{
 		boolean isDeleted = false;
 		String Message = "Order was not deleted.";
 		
-		for(int O = 0;O < orderList.size();O++)
+		int foodNumber = Helper.readInt("Enter the food number to delete > ");
+		
+		for(int O = 0;O < cart.size();O++)
 		{
-			if(orderList.get(O).getNumber() == foodNumber)
+			if(cart.get(O).getNumber() == foodNumber)
 			{
-				orderList.remove(O);
+				cart.remove(O);
 				isDeleted = true;
 			}
 		}
@@ -226,17 +253,24 @@ public class C206_CaseStudy {
 	private void viewOrders()
 	{
 		String output = "";
-		output += String.format("%-20s%-20s%s\n", "No.", "NAME", "PRICE");
-		for(int i = 0;i < orderList.size();i++)
+		
+		if(cart.size() > 0)
 		{
-			output += String.format("%-20d%-20s%.2f\n", i, orderList.get(i).getName(), orderList.get(i).getPrice());
+			output = String.format("%-10s%-20s%s\n", "No.", "NAME", "PRICE");
+			for(int i = 0;i < cart.size();i++)
+			{
+				output += String.format("%-10d%-20s%.2f\n", (i + 1), cart.get(i).getName(), cart.get(i).getPrice());
+			}
 		}
+		else
+		{
+			output = "There is no orders in the cart.";
+		}
+		
+		
 		System.out.println(output);
 	}
 	
-	private void placeOrder()
-	{
-	}
 	
 //  end of customer code =============================================================================	
 	
