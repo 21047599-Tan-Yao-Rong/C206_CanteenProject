@@ -22,8 +22,9 @@ public class C206_CaseStudy {
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
 		Cs.loadMenuList();
-		Cs.cutomerStart();
+		// Cs.cutomerStart();
 		Cs.loadOrders();
+		Cs.start();
 	}
 	
 	public static void setHeader(String header) {
@@ -76,9 +77,8 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 		System.out.println("Option 1: View all stalls");
 		System.out.println("Option 2: Add new stalls");
-		System.out.println("Option 3: Change stall information");
-		System.out.println("Option 4: Remove Stall");
-		System.out.println("Option 5: Quit");
+		System.out.println("Option 3: Remove Stall");
+		System.out.println("Option 4: Quit");
 		Helper.line(50, "=");
 	}
 	private void CanteenAdminFoodMenu() { 
@@ -97,35 +97,33 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 	}
 	
-//	private void start()
-//	{
-//		CanteenAdminMenu();
-//		int option = Helper.readInt("Enter your option > ");
-//		while(option != 5) {
-//			if (option == 1) {
-//				viewStalls();
-//			}
-//			else if (option == 2) {
-//				addNewStalls();
-//			}
-//			else if(option == 3) {
-//				changeStall();
-//			}
-//			else if(option == 4) {
-//				deleteStall();
-//			}
-//			else {
-//				System.out.println("Invaild option");
-//			}
-//			CanteenAdminMenu();
-//			option = Helper.readInt("Enter your option > ");
-//		}
-//		
-//		
-//		
-//		System.out.println("Bye bye");
-//		
-//	}
+	private void start()
+	{
+		CanteenAdminMenu();
+		int option = Helper.readInt("Enter your option > ");
+		while(option != 4) {
+			if (option == 1) {
+				C206_CaseStudy.viewStalls(StallList);
+			}
+			else if (option == 2) {
+				Stall newStall = inputStall();
+				C206_CaseStudy.addNewStalls(StallList, newStall);
+			}
+			else if(option == 3) {
+				deleteStall();
+			}
+			else {
+				System.out.println("Invaild option");
+			}
+			CanteenAdminMenu();
+			option = Helper.readInt("Enter your option > ");
+		}
+		
+		
+		
+		System.out.println("Bye bye");
+		
+	}
 	/*private void start() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
@@ -152,54 +150,41 @@ public class C206_CaseStudy {
 	
 //  CUSTOMER CODE====================================================================
 	
-	private void cutomerStart() { 
-		CustomerMenu();
-		int option = Helper.readInt("Enter option number > ");
-		while(option != 6) 
-		{ 
-			if (option == 1) 
-			{
-				viewStalls();
-			}
-			else if (option == 2) 
-			{
-				viewMenu();
-			}
-			else if(option == 3) 
-			{
-				Cart orders = inputOrder();
-				C206_CaseStudy.addOrder(cart, orders);
-			}
-			else if(option == 4) 
-			{
-				C206_CaseStudy.viewAllOrders(cart);
-			}
-			else if(option == 5) 
-			{
-				int FoodNumber = inputFoodNumber();
-				C206_CaseStudy.deleteOrder(cart, FoodNumber);
-			}
-			else {
-				System.out.println("Invaild option");	
-			}
-			CustomerMenu();
-			option = Helper.readInt("Enter option number > ");
-		}
-		System.out.println("Bye");
-	}
-	
-	private void viewStalls()
-	{
-		String output = "";
-		output += String.format("%-20s%-20s%s\n", "STALL ID", "STALL NAME", "OPERATION DATE");
-		for(int i =0;i<10; i++) {
-			if (StallList[i] != null) {
-				output += String.format("%-20s%-20s%s\n", StallList[i].getID(), StallList[i].getName(), StallList[i].getOperationDate());
-			}
-
-		}
-		System.out.println(output);
-	}
+//	private void cutomerStart() { 
+//		CustomerMenu();
+//		int option = Helper.readInt("Enter option number > ");
+//		while(option != 6) 
+//		{ 
+//			if (option == 1) 
+//			{
+//				viewStalls();
+//			}
+//			else if (option == 2) 
+//			{
+//				viewMenu();
+//			}
+//			else if(option == 3) 
+//			{
+//				Cart orders = inputOrder();
+//				C206_CaseStudy.addOrder(cart, orders);
+//			}
+//			else if(option == 4) 
+//			{
+//				C206_CaseStudy.viewAllOrders(cart);
+//			}
+//			else if(option == 5) 
+//			{
+//				int FoodNumber = inputFoodNumber();
+//				C206_CaseStudy.deleteOrder(cart, FoodNumber);
+//			}
+//			else {
+//				System.out.println("Invaild option");	
+//			}
+//			CustomerMenu();
+//			option = Helper.readInt("Enter option number > ");
+//		}
+//		System.out.println("Bye");
+//	}
 	
 	private void viewMenu()
 	{
@@ -275,19 +260,47 @@ public class C206_CaseStudy {
 	
 //  end of customer code =============================================================================	
 	
-	private void addNewStalls() {
+	public static String retrieveAllStalls(Stall[] StallList) {
+		String output = "";
+		
+		for(int i =0;i<10; i++) {
+			if (StallList[i] != null) {
+				output += String.format("%-20s%-20s%s\n", StallList[i].getID(), StallList[i].getName(), StallList[i].getOperationDate());
+			}
+		}
+		return output;
+		
+	}
+	
+	private static void viewStalls(Stall[] StallList)
+	{
+		String output = String.format("%-20s%-20s%s\n", "STALL ID", "STALL NAME", "OPERATION DATE");
+		output += retrieveAllStalls(StallList);
+		System.out.println(output);
+	}
+	
+	public static Stall inputStall() {
+		String StallID = Helper.readString("Enter ID of new stall > ");
+		String StallName = Helper.readString("Enter name of new stall > ");
+		String operationDate = Helper.readString("Enter operation date of new stall (dd/MM/yyyy) > ");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate date = LocalDate.parse(operationDate, formatter);
+		Stall newStall = new Stall(StallID, StallName, date);
+		
+		return newStall;
+	}
+	
+	public static void addNewStalls(Stall[] StallList, Stall newStall) {
 		
 		boolean stallAdded = false;
 		
 		for(int i = 0;i<10;i++) {
 			if (StallList[i] == null) {
-				String newStall = Helper.readString("Enter name of new stall > ");
-				String operationDate = Helper.readString("Enter operation date of new stall (dd/MM/yyyy) > ");
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				LocalDate date = LocalDate.parse(operationDate, formatter);
-				StallList[i] = new Stall("S" + (i+1), newStall, date);
+				
+				StallList[i] = newStall;
+				
 				stallAdded = true;
-				System.out.println(newStall + " has sucessfully been added");
+				System.out.println(newStall.getName() + " has sucessfully been added");
 				break;
 			}
 		}
@@ -296,33 +309,35 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	private void changeStall() {
-		viewStalls();
-		String stallID = Helper.readString("Enter ID of stall to change information > ");
-		for(int i = 0;i<10;i++) {
-			if ((StallList[i] != null) && (StallList[i].getID().equalsIgnoreCase(stallID))) {
-				Helper.line(50, "=");
-				System.out.println("Option 1: Change name of store");
-				System.out.println("Option 2: Change Operation date");
-				Helper.line(50, "=");
-				int option = Helper.readInt("Enter your option > ");
-
-					if (option == 1) {
-						String newName = Helper.readString("Enter new name of stall > ");
-						StallList[i].changeName(newName);
-
-					}
-					else if (option == 2) {
-						String operationDate = Helper.readString("Enter new operation date of stall (dd/MM/yyyy) > ");
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-						LocalDate date = LocalDate.parse(operationDate, formatter);
-						StallList[i].changeOperationDate(date);
-
-					}
-			}
-		}
-
-	}
+	
+	
+//	private void changeStall() {
+//		viewStalls();
+//		String stallID = Helper.readString("Enter ID of stall to change information > ");
+//		for(int i = 0;i<10;i++) {
+//			if ((StallList[i] != null) && (StallList[i].getID().equalsIgnoreCase(stallID))) {
+//				Helper.line(50, "=");
+//				System.out.println("Option 1: Change name of store");
+//				System.out.println("Option 2: Change Operation date");
+//				Helper.line(50, "=");
+//				int option = Helper.readInt("Enter your option > ");
+//
+//					if (option == 1) {
+//						String newName = Helper.readString("Enter new name of stall > ");
+//						StallList[i].changeName(newName);
+//
+//					}
+//					else if (option == 2) {
+//						String operationDate = Helper.readString("Enter new operation date of stall (dd/MM/yyyy) > ");
+//						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//						LocalDate date = LocalDate.parse(operationDate, formatter);
+//						StallList[i].changeOperationDate(date);
+//
+//					}
+//			}
+//		}
+//
+//	}
 	
 	private void deleteStall() {
 		viewStalls();
