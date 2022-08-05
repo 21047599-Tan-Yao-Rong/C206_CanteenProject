@@ -350,6 +350,22 @@ public class C206_CaseStudy {
 	}
 	
 // Canteen Admin codes (Menu)====================================================================================
+	private void retrieveMenu()
+	{
+		String ID = Helper.readString("Enter the stall ID > ");
+		String output = "";
+		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
+		for(Menu M : menuList)
+		{
+			if(ID.equals(M.getStallID()))
+			{
+				output += String.format("%-20s%-20s%d\n", M.getNumber(), M.getName(), M.getPrice());
+			}
+			
+		}
+		
+		System.out.println(output);
+	}
 	private void addFoodItem() { 
 		boolean foodAdded = false;
 		
