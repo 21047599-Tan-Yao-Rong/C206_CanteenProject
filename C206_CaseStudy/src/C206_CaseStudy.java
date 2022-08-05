@@ -22,7 +22,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
 		Cs.loadMenuList();
-		Cs.start();
+		Cs.cutomerStart();
 	}
 	
 	private void loadStallList()
@@ -42,6 +42,11 @@ public class C206_CaseStudy {
 		menuList.add(new Menu(003,"Fish and Chips",5));
 		menuList.add(new Menu(004,"Kimchi Fried Rice",6));
 		menuList.add(new Menu(005,"Soda Drinks",3));
+	}
+	
+	private void CustomerMenu()
+	{
+		
 	}
 	
 	private void CanteenAdminMenu() {
@@ -69,35 +74,35 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 	}
 	
-	private void start()
-	{
-		CanteenAdminMenu();
-		int option = Helper.readInt("Enter your option > ");
-		while(option != 5) {
-			if (option == 1) {
-				viewStalls();
-			}
-			else if (option == 2) {
-				addNewStalls();
-			}
-			else if(option == 3) {
-				changeStall();
-			}
-			else if(option == 4) {
-				deleteStall();
-			}
-			else {
-				System.out.println("Invaild option");
-			}
-			CanteenAdminMenu();
-			option = Helper.readInt("Enter your option > ");
-		}
-		
-		
-		
-		System.out.println("Bye bye");
-		
-	}
+//	private void start()
+//	{
+//		CanteenAdminMenu();
+//		int option = Helper.readInt("Enter your option > ");
+//		while(option != 5) {
+//			if (option == 1) {
+//				viewStalls();
+//			}
+//			else if (option == 2) {
+//				addNewStalls();
+//			}
+//			else if(option == 3) {
+//				changeStall();
+//			}
+//			else if(option == 4) {
+//				deleteStall();
+//			}
+//			else {
+//				System.out.println("Invaild option");
+//			}
+//			CanteenAdminMenu();
+//			option = Helper.readInt("Enter your option > ");
+//		}
+//		
+//		
+//		
+//		System.out.println("Bye bye");
+//		
+//	}
 	/*private void start() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
@@ -124,6 +129,30 @@ public class C206_CaseStudy {
 	
 //  CUSTOMER CODE====================================================================
 	
+	private void cutomerStart() { 
+		CanteenAdminFoodMenu();
+		int option = Helper.readInt("Enter option number > ");
+		while(option != 5) { 
+			if (option == 1) {
+				viewStalls();
+			}
+			else if (option == 2) {
+				viewMenu();
+			}
+			else if(option == 3) {
+				deleteFoodItem();
+			}
+			else if(option == 4) {
+				changePrice();
+			}
+			else {
+				System.out.println("Invaild option");
+			}
+			CanteenAdminFoodMenu();
+			option = Helper.readInt("Enter option number > ");
+		}
+		System.out.println("Bye");
+	}
 	private void viewStalls()
 	{
 		String output = "";
@@ -136,6 +165,79 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
+	
+	private void viewMenu()
+	{
+		String output = "";
+		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
+		for(Menu M : menuList)
+		{
+			output += String.format("%-20s%-20s%.2f\n", M.getNumber(), M.getName(), M.getPrice());
+		}
+		System.out.println(output);
+	}
+	
+	private String addOrder()
+	{
+		boolean isAdd = false;
+		String Message = "Order was not added successfully.";
+		int foodNumber = Helper.readInt("Enter food");
+		
+		for(Menu M : menuList)
+		{
+			if(M.getNumber() == foodNumber)
+			{
+				orderList.add(new Order(foodNumber, M.getName(), M.getPrice()));
+				isAdd = true;
+			}
+		}
+		
+		if(isAdd == true)
+		{
+			Message = "Order was added successfully.";
+		}
+		
+		return Message;
+	}
+	
+	private String deleteOrder(int foodNumber)
+	{
+		boolean isDeleted = false;
+		String Message = "Order was not deleted.";
+		
+		for(int O = 0;O < orderList.size();O++)
+		{
+			if(orderList.get(O).getNumber() == foodNumber)
+			{
+				orderList.remove(O);
+				isDeleted = true;
+			}
+		}
+		
+		if(isDeleted == true)
+		{
+			Message = "Order was deleted successfully.";
+		}
+		
+		return Message;
+	}
+	
+	private void viewOrders()
+	{
+		String output = "";
+		output += String.format("%-20s%-20s%s\n", "No.", "NAME", "PRICE");
+		for(int i = 0;i < orderList.size();i++)
+		{
+			output += String.format("%-20d%-20s%.2f\n", i, orderList.get(i).getName(), orderList.get(i).getPrice());
+		}
+		System.out.println(output);
+	}
+	
+	private void placeOrder()
+	{
+	}
+	
+//  end of customer code =============================================================================	
 	
 	private void addNewStalls() {
 		
@@ -196,17 +298,6 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	private void viewMenu()
-	{
-		String output = "";
-		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
-		for(Menu M : menuList)
-		{
-			output += String.format("%-20s%-20s%.2f\n", M.getNumber(), M.getName(), M.getPrice());
-		}
-		System.out.println(output);
-	}
-	
 
 	private void addFoodItem() { 
 		boolean foodAdded = false;
@@ -246,64 +337,6 @@ public class C206_CaseStudy {
 				System.out.println("Price successfully updated.");
 			}
 		}
-	}
-	private String addOrder(int foodNumber)
-	{
-		boolean isAdd = false;
-		String Message = "Order was not added successfully.";
-		
-		for(Menu M : menuList)
-		{
-			if(M.getNumber() == foodNumber)
-			{
-				orderList.add(new Order(foodNumber, M.getName(), M.getPrice()));
-				isAdd = true;
-			}
-		}
-		
-		if(isAdd == true)
-		{
-			Message = "Order was added successfully.";
-		}
-		
-		return Message;
-	}
-	
-	private String deleteOrder(int foodNumber)
-	{
-		boolean isDeleted = false;
-		String Message = "Order was not deleted.";
-		
-		for(int O = 0;O < orderList.size();O++)
-		{
-			if(orderList.get(O).getNumber() == foodNumber)
-			{
-				orderList.remove(O);
-				isDeleted = true;
-			}
-		}
-		
-		if(isDeleted == true)
-		{
-			Message = "Order was deleted successfully.";
-		}
-		
-		return Message;
-	}
-	
-	private void viewOrders()
-	{
-		String output = "";
-		output += String.format("%-20s%-20s%s\n", "No.", "NAME", "PRICE");
-		for(int i = 0;i < orderList.size();i++)
-		{
-			output += String.format("%-20d%-20s%.2f\n", i, orderList.get(i).getName(), orderList.get(i).getPrice());
-		}
-		System.out.println(output);
-	}
-	
-	private void placeOrder()
-	{
 	}
 	
 //Stall operator Code-----------------------------------------------------------------------------------------------
