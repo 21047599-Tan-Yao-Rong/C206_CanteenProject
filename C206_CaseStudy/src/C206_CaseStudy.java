@@ -23,6 +23,13 @@ public class C206_CaseStudy {
 		Cs.loadStallList();
 		Cs.loadMenuList();
 		Cs.cutomerStart();
+		Cs.loadOrders();
+	}
+	
+	public static void setHeader(String header) {
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
 	}
 	
 	private void loadStallList()
@@ -37,6 +44,11 @@ public class C206_CaseStudy {
 	private void loadIngrediantOrders() 
 	{
 		IngrediantOrderList.add(new Order(1,"Chicken",20));
+	}
+	
+	private void loadOrders() {
+		cart.add(new Cart(001,"Chicken Rice",5));
+		cart.add(new Cart(002,"chicken cultlet",6));
 	}
 	
 	private void loadMenuList() {
@@ -155,15 +167,16 @@ public class C206_CaseStudy {
 			}
 			else if(option == 3) 
 			{
-				System.out.println(addOrder());
+				Cart orders = inputOrder();
+				C206_CaseStudy.addOrder(cart, orders);
 			}
 			else if(option == 4) 
 			{
-				viewOrders();
+				C206_CaseStudy.viewAllOrders(cart);
 			}
 			else if(option == 5) 
 			{
-				System.out.println(deleteOrder());
+				// delete
 			}
 			else {
 				System.out.println("Invaild option");	
@@ -204,74 +217,90 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
-	private String addOrder()
-	{
-		boolean isAdd = false;
-		String Message = "Order was not added successfully.";
-		
+//	private String addOrder()
+//	{
+//		boolean isAdd = false;
+//		String Message = "Order was not added successfully.";
+//		
+//		int foodNumber = Helper.readInt("Enter food Number > ");
+//		
+//		for(Menu M : menuList)
+//		{
+//			if(M.getNumber() == foodNumber)
+//			{
+//				cart.add(new Cart(foodNumber, M.getName(), M.getPrice()));
+//				isAdd = true;
+//			}
+//		}
+//		
+//		if(isAdd == true)
+//		{
+//			Message = "Order was added successfully.";
+//		}
+//		
+//		return Message;
+//	}
+	
+	public static Cart inputOrder() {
 		int foodNumber = Helper.readInt("Enter food Number > ");
+		String name = Helper.readString("Enter name > ");
+		int price = Helper.readInt("Enter price > ");
 		
-		for(Menu M : menuList)
-		{
-			if(M.getNumber() == foodNumber)
-			{
-				cart.add(new Cart(foodNumber, M.getName(), M.getPrice()));
-				isAdd = true;
-			}
-		}
 		
-		if(isAdd == true)
-		{
-			Message = "Order was added successfully.";
-		}
-		
-		return Message;
+		Cart order = new Cart(foodNumber, name, price);
+		return order;
 	}
 	
-	private String deleteOrder()
-	{
-		boolean isDeleted = false;
-		String Message = "Order was not deleted.";
+	public static void addOrder(ArrayList<Cart> cart, Cart order) {
+		cart.add(order);
 		
-		int foodNumber = Helper.readInt("Enter the food number to delete > ");
-		
-		for(int O = 0;O < cart.size();O++)
-		{
-			if(cart.get(O).getNumber() == foodNumber)
-			{
-				cart.remove(O);
-				isDeleted = true;
-			}
-		}
-		
-		if(isDeleted == true)
-		{
-			Message = "Order was deleted successfully.";
-		}
-		
-		return Message;
 	}
 	
-	private void viewOrders()
+//	private String deleteOrder()
+//	{
+//		boolean isDeleted = false;
+//		String Message = "Order was not deleted.";
+//		
+//		int foodNumber = Helper.readInt("Enter the food number to delete > ");
+//		
+//		for(int O = 0;O < cart.size();O++)
+//		{
+//			if(cart.get(O).getNumber() == foodNumber)
+//			{
+//				cart.remove(O);
+//				isDeleted = true;
+//			}
+//		}
+//		
+//		if(isDeleted == true)
+//		{
+//			Message = "Order was deleted successfully.";
+//		}
+//		
+//		return Message;
+//	}
+	
+	
+	
+	public static String retrieveAllOrders(ArrayList<Cart> cart)
 	{
 		String output = "";
 		
-		if(cart.size() > 0)
+		for (int i = 0; i < cart.size(); i++) 
 		{
-			output = String.format("%-10s%-20s%s\n", "No.", "NAME", "PRICE");
-			for(int i = 0;i < cart.size();i++)
-			{
-				output += String.format("%-10d%-20s%.2f\n", (i + 1), cart.get(i).getName(), cart.get(i).getPrice());
-			}
-		}
-		else
-		{
-			output = "There is no orders in the cart.";
+			output += String.format("%-10d %-20s %-20d\n", i + 1, cart.get(i).getName(), cart.get(i).getPrice());
 		}
 		
-		
+		return output;
+	}
+	
+	public static void viewAllOrders(ArrayList<Cart> cart) {
+		C206_CaseStudy.setHeader("ORDER LIST");
+		String output = String.format("%-10s %-20s %-20s\n", "No.", "NAME", "PRICE");
+		 output += retrieveAllOrders(cart);	
 		System.out.println(output);
 	}
+	
 	
 	
 //  end of customer code =============================================================================	
