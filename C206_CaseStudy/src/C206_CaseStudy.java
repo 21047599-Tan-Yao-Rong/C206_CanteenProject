@@ -334,7 +334,7 @@ public class C206_CaseStudy {
 		}
 	}
 	
-
+// Canteen Admin codes (Menu)====================================================================================
 	private void addFoodItem() { 
 		boolean foodAdded = false;
 		
@@ -359,19 +359,6 @@ public class C206_CaseStudy {
 		for (int i = 0; i < menuList.size(); i++) { 
 			if (i == foodNum) { 
 				menuList.remove(foodNum);
-			}
-		}
-	}
-	
-	
-	private void changePrice() { 
-		viewMenu();
-		int foodNum = Helper.readInt("Enter food number to change price > ");
-		int newPrice = Helper.readInt("Enter new price for food item > ");
-		for (int i = 0; i < menuList.size(); i++) { 
-			if (i == foodNum || newPrice < 15 || newPrice > 3) { 
-				menuList.get(foodNum).setPrice(newPrice);
-				System.out.println("Price successfully updated.");
 			}
 		}
 	}
