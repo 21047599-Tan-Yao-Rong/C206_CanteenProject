@@ -36,10 +36,10 @@ public class C206_CaseStudyTest {
 	{
 		Stall1 = new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15));
 		menuStalla1 = new Menu(001,"S1", "Chicken Rice",5);
-		menuStalla2 = new Menu(002,"S1", "chicken cultlet",6);
+		menuStalla2 = new Menu(002,"S1", "Chicken Cutlet",6);
 		
 		order1 = new Cart(001,"Chicken Rice",5);
-		order2 = new Cart(002,"chicken cultlet",6);
+		order2 = new Cart(002,"Chicken Cutlet",6);
 		
 		StallList = new Stall[10];
 		menuList = new ArrayList<Menu>();
