@@ -56,10 +56,7 @@ public class C206_CaseStudy {
 		
 		menuList.add(new Menu(001,"S1", "Chicken Rice",5));
 		menuList.add(new Menu(002,"S2", "Bolognese Spaghetti",3));
-		menuList.add(new Menu(003, "S3", "Fish and Chips",5));
-		menuList.add(new Menu(004, "S4", "Kimchi Fried Rice",6));
-		menuList.add(new Menu(005,"S5", "Soda Drinks",3));
-	}
+
 	
 	private void CustomerMenu()
 	{
@@ -350,23 +347,27 @@ public class C206_CaseStudy {
 	}
 	
 // Canteen Admin codes (Menu)====================================================================================
-	private void retrieveMenu()
+	public static String retrieveMenu(ArrayList<Menu> menuList)
 	{
 		String ID = Helper.readString("Enter the stall ID > ");
 		String output = "";
 		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
-		for(Menu M : menuList)
-		{
-			if(ID.equals(M.getStallID()))
-			{
+		for(Menu M : menuList){
+			if(ID.equals(M.getStallID())){
 				output += String.format("%-20s%-20s%d\n", M.getNumber(), M.getName(), M.getPrice());
-			}
-			
+			}	
 		}
-		
+		return output;
+	}
+	
+	private static void viewMenu(ArrayList<Menu> menuList, Menu foodItem )
+	{
+		String output = String.format("%-20s %-20s %-20s %-20s\n", "FOOD NUMBER", "STALL ID", "FOOD ITEM NAME", "PRICE");
+		output += retrieveMenu(menuList);
 		System.out.println(output);
 	}
-	private void addFoodItem() { 
+	
+	/*public void addFoodItem(ArrayList<Menu> menuList, int foodNumber) { 
 		boolean foodAdded = false;
 		
 		for(int i = 0; i < menuList.size(); i++) {
@@ -383,8 +384,26 @@ public class C206_CaseStudy {
 		if (foodAdded == false) {
 			System.out.println("Food Item is not added!");
 		}
+	}*/
+	public static Menu inputFoodItem() {
+		int number = Helper.readInt("Enter Food Number of new food item > ");
+		String stallID = Helper.readString("Enter Stall ID of new food item > ");
+		String name = Helper.readString("Enter name of new food item > ");
+		int price = Helper.readInt("Enter price > ");
+
+		Menu fI = new Menu(number, stallID, name, price);
+		return fI;
+		
 	}
-	private void deleteFoodItem() {
+	public static void addFoodItem(ArrayList<Menu> menuList, Menu fI) {
+		menuList.add(fI);
+		System.out.println("Food Item added.");
+
+	}
+	
+
+	
+	public void deleteFoodItem() {
 		viewMenu(); 
 		int foodNum = Helper.readInt("Enter food number to delete > ");
 		for (int i = 0; i < menuList.size(); i++) { 

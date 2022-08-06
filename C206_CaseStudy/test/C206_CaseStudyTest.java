@@ -47,6 +47,47 @@ public class C206_CaseStudyTest {
 		cart = new ArrayList<Cart>();
 	}
 
+	public void testRetrieveMenu() { 
+		// Test if Menu list is not null but empty, so that can add a new item
+		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
+		
+		//test if the list of food items retrieved from the SourceCentre is empty
+		String allMenu = C206_CaseStudy.retrieveMenu(menuList);
+		String testOutput = "";
+		assertEquals("Check that Menu has the correct food items", testOutput, allMenu);
+		
+		//Given an empty list, after adding 2 items, test if the size of the list is 2
+		C206_CaseStudy.addFoodItem(menuList, menuStalla1);
+		C206_CaseStudy.addFoodItem(menuList, menuStalla2);
+		assertEquals("Test if that Menu arraylist size is 2?", 2, menuList.size());
+		
+		//test if the expected output string same as the list of food items retrieved from the SourceCentre
+		allMenu = C206_CaseStudy.retrieveMenu(menuList);
+		
+		testOutput = String.format("%-10d %-20s %-20d\n", 1,"Chicken Rice", 5);
+		testOutput += String.format("%-10d %-20s %-20d\n", 2, "chicken cultlet",6);
+			
+		assertEquals("Check that Menu has the correct food items ", testOutput, allMenu);
+	}
+	public void testAddFoodItem() { 
+		// Item list is not null, so that can add a new item
+		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
+				
+		//Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addFoodItem(menuList, menuStalla1);		
+		assertEquals("Test if that Menu arraylist size is 1?", 1, menuList.size());
+		assertSame("Check that Order is added", menuStalla1, cart.get(0));
+
+				
+		//Add another item. test The size of the list is 2?
+		C206_CaseStudy.addFoodItem(menuList, menuStalla2);
+		assertEquals("Test that Menu arraylist size is 2?", 2, menuList.size());
+		assertSame("Check that Order is added", menuStalla2, cart.get(1));
+
+	}
+	public void testDeleteFoodItem() { 
+		
+	}
 //	Cutomer ==========================================================
 	
 	
