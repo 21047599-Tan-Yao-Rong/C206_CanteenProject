@@ -88,7 +88,7 @@ public class C206_CaseStudyTest {
 	public void testDeleteFoodItem() { 
 		// Menu list is not null, such that a Menu is available to delete from. 
 		assertNotNull("Check if there is Menu arraylist to delete from", menuList);
-		
+	
 		
 	}
 //	Cutomer ==========================================================

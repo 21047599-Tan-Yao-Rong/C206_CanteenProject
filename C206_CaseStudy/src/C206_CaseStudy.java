@@ -359,7 +359,7 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
-	
+
 	private static void viewMenu(ArrayList<Menu> menuList, Menu foodItem )
 	{
 		String output = String.format("%-20s %-20s %-20s %-20s\n", "FOOD NUMBER", "STALL ID", "FOOD ITEM NAME", "PRICE");
