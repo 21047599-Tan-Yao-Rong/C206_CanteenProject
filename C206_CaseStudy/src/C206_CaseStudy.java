@@ -108,7 +108,7 @@ public class C206_CaseStudy {
 				C206_CaseStudy.addNewStalls(StallList, newStall);
 			}
 			else if(option == 3) {
-				deleteStall();
+				C206_CaseStudy.deleteStall(StallList);
 			}
 			else {
 				System.out.println("Invaild option");
@@ -339,14 +339,33 @@ public class C206_CaseStudy {
 //
 //	}
 	
-	private void deleteStall() {
-		viewStalls();
-		String stallID = Helper.readString("Enter ID of stall to delete > ");
+	private static boolean doDeleteStall(Stall[] StallList, String stallID) {
+		
+		boolean isDeleted = false;
+		
 		for(int i = 0;i<10;i++) {
 			if ((StallList[i] != null) && (StallList[i].getID().equalsIgnoreCase(stallID))) {
 				StallList[i] = null;
+				isDeleted= true;
+				
 			}
 		}
+		
+		return isDeleted;
+		
+	}
+	
+	private static void deleteStall(Stall[] StallList) {
+		viewStalls(StallList);
+		String stallID = Helper.readString("Enter ID of stall to delete > ");
+		Boolean isDeleted = doDeleteStall(StallList, stallID);
+		if (isDeleted == true) {
+			System.out.println("Stall successfully deleted");
+		}
+		else {
+			System.out.println("Deletion of stall is unsucessful");
+		}
+
 	}
 	
 // Canteen Admin codes (Menu)====================================================================================
