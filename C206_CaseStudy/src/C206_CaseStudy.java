@@ -366,25 +366,7 @@ public class C206_CaseStudy {
 		output += retrieveMenu(menuList);
 		System.out.println(output);
 	}
-	
-	/*public void addFoodItem(ArrayList<Menu> menuList, int foodNumber) { 
-		boolean foodAdded = false;
-		
-		for(int i = 0; i < menuList.size(); i++) {
-			if (menuList.get(i) == null) {
-				String newFoodItem = Helper.readString("Enter name of new food item > ");
-				int price = Helper.readInt("Enter price of new food item > ");
-				String stallID = Helper.readString("Enter stall ID of new food item > ");
-				menuList.add(new Menu(i+1, stallID, newFoodItem, price));
-				foodAdded = true;
-				System.out.println(newFoodItem + " has sucessfully been added");
-				break;
-			}
-		}
-		if (foodAdded == false) {
-			System.out.println("Food Item is not added!");
-		}
-	}*/
+
 	public static Menu inputFoodItem() {
 		int number = Helper.readInt("Enter Food Number of new food item > ");
 		String stallID = Helper.readString("Enter Stall ID of new food item > ");
@@ -397,12 +379,11 @@ public class C206_CaseStudy {
 	}
 	public static void addFoodItem(ArrayList<Menu> menuList, Menu fI) {
 		menuList.add(fI);
-		System.out.println("Food Item added.");
+		System.out.println("Food Item added!");
 
 	}
 	
 
-	
 	public void deleteFoodItem() {
 		viewMenu(); 
 		int foodNum = Helper.readInt("Enter food number to delete > ");
@@ -410,6 +391,7 @@ public class C206_CaseStudy {
 			if (i == foodNum) { 
 				menuList.remove(foodNum);
 			}
+			System.out.println("Food Item deleted successfully!");
 		}
 	}
 	

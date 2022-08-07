@@ -82,10 +82,13 @@ public class C206_CaseStudyTest {
 		//Add another item. test The size of the list is 2?
 		C206_CaseStudy.addFoodItem(menuList, menuStalla2);
 		assertEquals("Test that Menu arraylist size is 2?", 2, menuList.size());
-		assertSame("Check that Order is added", menuStalla2, cart.get(1));
+		assertSame("Check that Order is added", menuStalla2, menuList.get(1));
 
 	}
 	public void testDeleteFoodItem() { 
+		// Menu list is not null, such that a Menu is available to delete from. 
+		assertNotNull("Check if there is Menu arraylist to delete from", menuList);
+		
 		
 	}
 //	Cutomer ==========================================================
