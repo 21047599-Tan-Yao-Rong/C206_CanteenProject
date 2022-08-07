@@ -56,6 +56,7 @@ public class C206_CaseStudy {
 		
 		menuList.add(new Menu(001,"S1", "Chicken Rice",5));
 		menuList.add(new Menu(002,"S2", "Bolognese Spaghetti",3));
+	}
 
 	
 	private void CustomerMenu()
@@ -81,9 +82,9 @@ public class C206_CaseStudy {
 	private void CanteenAdminFoodMenu() { 
 		Helper.line(50, "=");
 		System.out.println("Option 1: View all food items");
-		System.out.println("Option 1: Add new food items");
-		System.out.println("Option 1: Delete food item");
-		System.out.println("Option 1: Change food items price");
+		System.out.println("Option 2: Add new food items");
+		System.out.println("Option 3: Delete food item");
+		System.out.println("Option 4: Quit");
 		Helper.line(50, "=");
 	}
 	private void StallOperatorMenu() { 
@@ -124,18 +125,20 @@ public class C206_CaseStudy {
 	/*private void start() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
-		while(option != 5) { 
+		while(option != 4) { 
 			if (option == 1) {
 				viewMenu();
 			}
 			else if (option == 2) {
-				addFoodItem();
+				Menu foodItem = inputFoodItem();
+				addFoodItem(menuList, foodItem);
 			}
 			else if(option == 3) {
-				deleteFoodItem();
+				int foodNum = inputFoodNum();
+				deleteFoodItem(menuList, foodNum);
 			}
-			else if(option == 4) {
-				changePrice();
+			else if (option == 4) { 
+				System.out.println("Bye bye");
 			}
 			else {
 				System.out.println("Invaild option");
@@ -360,8 +363,7 @@ public class C206_CaseStudy {
 		return output;
 	}
 
-	private static void viewMenu(ArrayList<Menu> menuList, Menu foodItem )
-	{
+	private static void viewMenu(ArrayList<Menu> menuList) {
 		String output = String.format("%-20s %-20s %-20s %-20s\n", "FOOD NUMBER", "STALL ID", "FOOD ITEM NAME", "PRICE");
 		output += retrieveMenu(menuList);
 		System.out.println(output);
@@ -373,23 +375,24 @@ public class C206_CaseStudy {
 		String name = Helper.readString("Enter name of new food item > ");
 		int price = Helper.readInt("Enter price > ");
 
-		Menu fI = new Menu(number, stallID, name, price);
-		return fI;
+		Menu foodItem = new Menu(number, stallID, name, price);
+		return foodItem;
 		
 	}
-	public static void addFoodItem(ArrayList<Menu> menuList, Menu fI) {
-		menuList.add(fI);
+	public static void addFoodItem(ArrayList<Menu> menuList, Menu foodItem) {
+		menuList.add(foodItem);
 		System.out.println("Food Item added!");
 
 	}
-	
+	public static int inputFoodNum() {
+		int foodNumber = Helper.readInt("Enter the food Number you want to delete > ");
+		return foodNumber;
+	}
 
-	public void deleteFoodItem() {
-		viewMenu(); 
-		int foodNum = Helper.readInt("Enter food number to delete > ");
+	public static void deleteFoodItem(ArrayList<Menu> menuList, int foodNumber) {
 		for (int i = 0; i < menuList.size(); i++) { 
-			if (i == foodNum) { 
-				menuList.remove(foodNum);
+			if (i == foodNumber) { 
+				menuList.remove(foodNumber);
 			}
 			System.out.println("Food Item deleted successfully!");
 		}
