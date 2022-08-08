@@ -6,7 +6,7 @@ public class C206_CaseStudy {
 	
 //	creating the stallList arraylist 
 	// private ArrayList<Stall> stallList = new ArrayList<Stall>();
-	private Stall[] StallList = new Stall[10];
+	private ArrayList<Stall> stallList = new ArrayList<Stall>();
 	
 //  creating the menuList arrayist
 	private ArrayList<Menu> menuList = new ArrayList<Menu>();
@@ -21,9 +21,9 @@ public class C206_CaseStudy {
 	{
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
-		Cs.loadMenuList();
+		//Cs.loadMenuList();
 		// Cs.cutomerStart();
-		Cs.loadOrders();
+		//Cs.loadOrders();
 		Cs.start();
 	}
 	
@@ -35,12 +35,11 @@ public class C206_CaseStudy {
 	
 	private void loadStallList()
 	{
-		StallList[0] = new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15));
-		//stallList.add(new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15)));
-		//stallList.add(new Stall("S2", "Chicken Rice Store", LocalDate.of(2018, 5, 18)));
-		//stallList.add(new Stall("S3", "Western Cuisine", LocalDate.of(2022, 12, 12)));
-		//stallList.add(new Stall("S4", "Japanese Cuisine", LocalDate.of(2023, 7, 13)));
-		//stallList.add(new Stall("S5", "Korean Cuisine", LocalDate.of(2016, 8, 14)));
+		stallList.add(new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15)));
+		stallList.add(new Stall("S2", "Chicken Rice Store", LocalDate.of(2018, 5, 18)));
+		stallList.add(new Stall("S3", "Western Cuisine", LocalDate.of(2022, 12, 12)));
+		stallList.add(new Stall("S4", "Japanese Cuisine", LocalDate.of(2023, 7, 13)));
+		stallList.add(new Stall("S5", "Korean Cuisine", LocalDate.of(2016, 8, 14)));
 	}
 	private void loadIngrediantOrders() 
 	{
@@ -101,14 +100,14 @@ public class C206_CaseStudy {
 		int option = Helper.readInt("Enter your option > ");
 		while(option != 4) {
 			if (option == 1) {
-				C206_CaseStudy.viewStalls(StallList);
+				C206_CaseStudy.viewStalls(stallList);
 			}
 			else if (option == 2) {
 				Stall newStall = inputStall();
-				C206_CaseStudy.addNewStalls(StallList, newStall);
+				C206_CaseStudy.addNewStalls(stallList, newStall);
 			}
 			else if(option == 3) {
-				C206_CaseStudy.deleteStall(StallList);
+				C206_CaseStudy.deleteStall(stallList);
 			}
 			else {
 				System.out.println("Invaild option");
@@ -260,22 +259,22 @@ public class C206_CaseStudy {
 	
 //  end of customer code =============================================================================	
 	
-	public static String retrieveAllStalls(Stall[] StallList) {
+	public static String retrieveAllStalls(ArrayList<Stall> stallList2) {
 		String output = "";
 		
-		for(int i =0;i<10; i++) {
-			if (StallList[i] != null) {
-				output += String.format("%-20s%-20s%s\n", StallList[i].getID(), StallList[i].getName(), StallList[i].getOperationDate());
+		for(int i =0;i<stallList2.size(); i++) {
+			if (stallList2.get(i) != null) {
+				output += String.format("%-20s%-20s%s\n", stallList2.get(i).getID(), stallList2.get(i).getName(), stallList2.get(i).getOperationDate());
 			}
 		}
 		return output;
 		
 	}
 	
-	private static void viewStalls(Stall[] StallList)
+	private static void viewStalls(ArrayList<Stall> stallList2)
 	{
 		String output = String.format("%-20s%-20s%s\n", "STALL ID", "STALL NAME", "OPERATION DATE");
-		output += retrieveAllStalls(StallList);
+		output += retrieveAllStalls(stallList2);
 		System.out.println(output);
 	}
 	
@@ -290,21 +289,28 @@ public class C206_CaseStudy {
 		return newStall;
 	}
 	
-	public static void addNewStalls(Stall[] StallList, Stall newStall) {
+	public static void addNewStalls(ArrayList<Stall> stallList2, Stall newStall) {
 		
 		boolean stallAdded = false;
-		
-		for(int i = 0;i<10;i++) {
-			if (StallList[i] == null) {
-				
-				StallList[i] = newStall;
-				
-				stallAdded = true;
-				System.out.println(newStall.getName() + " has sucessfully been added");
-				break;
+		boolean hasSameID = false;
+		for(int i = 0;i<stallList2.size();i++) {
+			
+			if (stallList2.get(i).getID().equals(newStall.getID())) {
+				hasSameID = true;
 			}
 		}
-		if (stallAdded == false) {
+		
+		if (stallList2.size() < 10 && hasSameID == false) {
+			
+			stallList2.add(newStall);
+			
+			System.out.println(newStall.getName() + " has sucessfully been added");
+		}
+		
+		else if(hasSameID == true) {
+			System.out.println("ERROR! Duplicate stall ID ");
+		}
+		else {
 			System.out.println("The canteen is full!");
 		}
 	}
@@ -339,13 +345,13 @@ public class C206_CaseStudy {
 //
 //	}
 	
-	private static boolean doDeleteStall(Stall[] StallList, String stallID) {
+	private static boolean doDeleteStall(ArrayList<Stall> stallList2, String stallID) {
 		
 		boolean isDeleted = false;
 		
 		for(int i = 0;i<10;i++) {
-			if ((StallList[i] != null) && (StallList[i].getID().equalsIgnoreCase(stallID))) {
-				StallList[i] = null;
+			if ((stallList2.get(i) != null) && (stallList2.get(i).getID().equalsIgnoreCase(stallID))) {
+				stallList2.remove(i);
 				isDeleted= true;
 				
 			}
@@ -355,10 +361,10 @@ public class C206_CaseStudy {
 		
 	}
 	
-	private static void deleteStall(Stall[] StallList) {
-		viewStalls(StallList);
+	private static void deleteStall(ArrayList<Stall> stallList2) {
+		viewStalls(stallList2);
 		String stallID = Helper.readString("Enter ID of stall to delete > ");
-		Boolean isDeleted = doDeleteStall(StallList, stallID);
+		Boolean isDeleted = doDeleteStall(stallList2, stallID);
 		if (isDeleted == true) {
 			System.out.println("Stall successfully deleted");
 		}

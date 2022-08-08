@@ -11,6 +11,7 @@ public class C206_CaseStudyTest {
 //  prepare test data
 	
 	private Stall Stall1;
+	private Stall Stall2;
 	
 	private Menu menuStalla1;
 	private Menu menuStalla2;
@@ -19,7 +20,7 @@ public class C206_CaseStudyTest {
 	private Cart order2;
 	
 //	creating the stallList arraylist 
-	private Stall[] StallList;
+	private ArrayList<Stall> StallList;
 	
 //  creating the menuList arrayist
 	private ArrayList<Menu> menuList;
@@ -35,13 +36,14 @@ public class C206_CaseStudyTest {
 	public void setUp() throws Exception 
 	{
 		Stall1 = new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15));
+		Stall2 = new Stall("S2", "Chicken rice store", LocalDate.of(2018, 11, 14));
 		menuStalla1 = new Menu(001,"S1", "Chicken Rice",5);
 		menuStalla2 = new Menu(002,"S1", "Chicken Cutlet",6);
 		
 		order1 = new Cart(001,"Chicken Rice",5);
 		order2 = new Cart(002,"Chicken Cutlet",6);
 		
-		StallList = new Stall[10];
+		StallList = new ArrayList<Stall>();
 		menuList = new ArrayList<Menu>();
 		IngrediantOrderList = new ArrayList<Order>();
 		cart = new ArrayList<Cart>();
@@ -218,8 +220,29 @@ public class C206_CaseStudyTest {
 	}
 	
 //	End of Cutomer ==========================================================
-	
-	
+	@Test
+	public void testRetrieveAllStalls() {
+		//Test if Stall array is not null but empty -boundary
+		assertNotNull("Test if there is valid Stall array to retrieve item", StallList);
+		
+		//Test if the stalls retrieved from the stall array is empty - boundary
+		String allStalls = C206_CaseStudy.retrieveAllStalls(StallList); 
+		String testOutput = "";
+		assertEquals("Test that the retrieved stallList is empty?", testOutput, allStalls);
+		
+		//Given an empty list, after adding 2 stalls, test if the size of the stall array is 2 -normal
+		C206_CaseStudy.addNewStalls(StallList, Stall1);
+		C206_CaseStudy.addNewStalls(StallList, Stall2);
+		assertEquals("Test that stall array size is 2" , 2, StallList.size());
+		
+		//test if the expected output string same as the stall array of stalls retrieved
+		allStalls = C206_CaseStudy.retrieveAllStalls(StallList);
+		testOutput += String.format("%-20s%-20s%s\n", "S1", "Drink Store", "2017-04-15");
+		testOutput += String.format("%-20s%-20s%s\n", "S2", "Chicken rice store", "2018-11-14");
+		
+		assertEquals("Test that the data format displayed is correct for view stall list", testOutput, allStalls);
+		
+	}
 	
 	
 	@After
