@@ -178,15 +178,15 @@ public class C206_CaseStudyTest {
 	public void testDeleteOrder()
 	{
 		// Item list is not null, so that can add a new item - boundary
-		assertNotNull("Check if there is Order arraylist to delete from", cart);
+		assertNotNull("Check if there is cart arraylist to delete from", cart);
 		
 		//adding one orders into the arraylist
 		C206_CaseStudy.addOrder(cart, order1);
-		assertEquals("Test if that Camcorder arraylist size is 1?", 1, cart.size());
+		assertEquals("Test if that cart arraylist size is 1?", 1, cart.size());
 		
 		// deleting the order from the arraylist
 		C206_CaseStudy.deleteOrder(cart, 001);
-		assertNotEquals("Test if that Camcorder arraylist size is not 1", 1, cart.size());
+		assertNotEquals("Test if that cart arraylist size is not 1", 1, cart.size());
 		
 		boolean exist = false;
 		for(Cart C : cart)
@@ -203,11 +203,11 @@ public class C206_CaseStudyTest {
 		//adding two orders into the arraylist
 		C206_CaseStudy.addOrder(cart, order1);
 		C206_CaseStudy.addOrder(cart, order2);
-		assertEquals("Test if that Camcorder arraylist size is 2?", 2, cart.size());
+		assertEquals("Test if that cart arraylist size is 2?", 2, cart.size());
 		
 		// deleting the order from the arraylist
 		C206_CaseStudy.deleteOrder(cart, 001);
-		assertNotEquals("Test if that Camcorder arraylist size is not 2", 2, cart.size());
+		assertNotEquals("Test if that cart arraylist size is not 2", 2, cart.size());
 		
 		exist = false;
 		for(Cart C : cart)
@@ -227,7 +227,7 @@ public class C206_CaseStudyTest {
 		// Test if cart list is not null but empty, so that can add a new item
 		assertNotNull("Test if there is valid cart arraylist to add to", cart);
 		
-		//test if the list of Orders retrieved from the SourceCentre is empty
+		//test if the list of Orders retrieved from the cart is empty
 		String allOrders = C206_CaseStudy.retrieveAllOrders(cart);
 		String testOutput = "";
 		assertEquals("Check that viewAllOrders", testOutput, allOrders);
@@ -235,9 +235,9 @@ public class C206_CaseStudyTest {
 		//Given an empty list, after adding 2 items, test if the size of the list is 2
 		C206_CaseStudy.addOrder(cart, order1);
 		C206_CaseStudy.addOrder(cart, order2);
-		assertEquals("Test if that Camcorder arraylist size is 2?", 2, cart.size());
+		assertEquals("Test if that cart arraylist size is 2?", 2, cart.size());
 		
-		//test if the expected output string same as the list of Orders retrieved from the SourceCentre
+		//test if the expected output string same as the list of Orders retrieved from the cart
 		allOrders = C206_CaseStudy.retrieveAllOrders(cart);
 		
 		testOutput = String.format("%-10d %-20s %-20d\n", 1,"Chicken Rice", 5);
