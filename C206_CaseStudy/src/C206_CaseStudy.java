@@ -56,19 +56,6 @@ public class C206_CaseStudy {
 		menuList.add(new Menu(001,"S1", "Chicken Rice",5));
 		menuList.add(new Menu(002,"S2", "Bolognese Spaghetti",3));
 	}
-
-	
-	private void CustomerMenu()
-	{
-		Helper.line(50, "=");
-		System.out.println("Option 1: View all stalls");
-		System.out.println("Option 2: View Menu");
-		System.out.println("Option 3: Add orders");
-		System.out.println("Option 4: View orders ");
-		System.out.println("Option 5: Delete orders ");
-		System.out.println("Option 6: Quit");
-		Helper.line(50, "=");
-	}
 	
 	private void CanteenAdminMenu() {
 		Helper.line(50, "=");
@@ -185,6 +172,18 @@ public class C206_CaseStudy {
 //		}
 //		System.out.println("Bye");
 //	}
+	
+	private void CustomerMenu()
+	{
+		Helper.line(50, "=");
+		System.out.println("Option 1: View all stalls");
+		System.out.println("Option 2: View Menu");
+		System.out.println("Option 3: Add orders");
+		System.out.println("Option 4: View orders ");
+		System.out.println("Option 5: Delete orders ");
+		System.out.println("Option 6: Quit");
+		Helper.line(50, "=");
+	}
 	
 	private void viewMenu()
 	{
