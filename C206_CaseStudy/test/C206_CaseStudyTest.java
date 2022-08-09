@@ -21,6 +21,7 @@ public class C206_CaseStudyTest {
 	private Stall Stall9;
 	private Stall Stall10;
 	private Stall Stall11;
+	private Stall StallLateDate;
 
 	
 	private Menu menuStalla1;
@@ -56,6 +57,7 @@ public class C206_CaseStudyTest {
 		Stall9 = new Stall("S9", "Noodle Store", LocalDate.of(2026, 7, 17));
 		Stall10 = new Stall("S10", "Muslim Store", LocalDate.of(2023, 10, 27));
 		Stall11 = new Stall("S11", "French Cuisine", LocalDate.of(2023, 12, 16));
+		StallLateDate = new Stall("S63", "Chinese Cuisine", LocalDate.of(2019, 11, 21));
 		menuStalla1 = new Menu(001,"S1", "Chicken Rice",5);
 		menuStalla2 = new Menu(002,"S1", "Chicken Cutlet",6);
 		
@@ -241,15 +243,15 @@ public class C206_CaseStudyTest {
 //	End of Cutomer ==========================================================
 	@Test
 	public void testRetrieveAllStalls() {
-		//Test if Stall array is not null but empty -boundary
+		//Test if Stall array is not null but empty
 		assertNotNull("Test if there is valid Stall arrayList to retrieve item", StallList);
 		
-		//Test if the stalls retrieved from the stall array is empty - boundary
+		//Test if the stalls retrieved from the stall array is empty
 		String allStalls = C206_CaseStudy.retrieveAllStalls(StallList); 
 		String testOutput = "";
 		assertEquals("Test that the retrieved stallList is empty?", testOutput, allStalls);
 		
-		//Given an empty list, after adding 2 stalls, test if the size of the stall array is 2 -normal
+		//Given an empty list, after adding 2 stalls, test if the size of the stall array is 2 
 		C206_CaseStudy.addNewStalls(StallList, Stall1);
 		C206_CaseStudy.addNewStalls(StallList, Stall2);
 		assertEquals("Test that stall array size is 2" , 2, StallList.size());
@@ -287,7 +289,9 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addNewStalls(StallList, Stall1);
 		assertEquals("Test if the stall arraylist size is 2 as duplicate stalls is not added into the stall list", 2 , StallList.size());
 		
-		
+		//Test that stall added with operational date before today's date will not be added
+		C206_CaseStudy.addNewStalls(StallList, StallLateDate);
+		assertEquals("Test if the stall arraylist size is 2 as stall with operational date before today's date will not be added into the stall list", 2 , StallList.size());
 		
 		//Test that when 8 stalls are added the size of the stall list is 10
 
@@ -304,13 +308,30 @@ public class C206_CaseStudyTest {
 		//Test when there is 10 stall in the stall arraylist, the 11th stall added will not exist in the stall arraylist
 		C206_CaseStudy.addNewStalls(StallList, Stall11);
 		assertEquals("Test if the stall arraylist size is still 10 after adding the 11th stall?", 10 , StallList.size());
-		
-		
 	
 	}
 	
 	@Test
 	public void testDeleteStalls() {
+		//Test if there is a valid stall arraylist to add stalls to
+		assertNotNull("Test if there is valid stall arrayList to add to", StallList);
+		C206_CaseStudy.addNewStalls(StallList, Stall1);
+		
+		//Test that Stall1 of Stall ID of "S1" is deleted	
+		boolean isDeleted = C206_CaseStudy.doDeleteStall(StallList, "S1");
+		assertTrue("Test if the deletion of stall is successful", isDeleted);
+		
+		//Test that size of Stall arraylist is 0 after deletion of stall1	
+		assertEquals("Test if the stall arraylist size is 0?", 0 , StallList.size());
+		
+		//Test that the non-existing stall is not deleted in the stall list
+		isDeleted = C206_CaseStudy.doDeleteStall(StallList, "S20");
+		assertFalse("Test if non-existing stall S20 is deleted -false", isDeleted);
+		
+		
+		
+		
+		
 		
 	}
 	
@@ -329,6 +350,7 @@ public class C206_CaseStudyTest {
 		Stall9 = null;
 		Stall10 = null;
 		Stall11 = null;
+		StallLateDate = null;
 		
 		menuStalla1 = null;
 		menuStalla2 = null;

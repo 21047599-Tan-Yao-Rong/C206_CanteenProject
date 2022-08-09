@@ -350,7 +350,7 @@ public class C206_CaseStudy {
 //
 //	}
 	
-	private static boolean doDeleteStall(ArrayList<Stall> stallList2, String stallID) {
+	public static boolean doDeleteStall(ArrayList<Stall> stallList2, String stallID) {
 		
 		boolean isDeleted = false;
 		
@@ -366,7 +366,7 @@ public class C206_CaseStudy {
 		
 	}
 	
-	private static void deleteStall(ArrayList<Stall> stallList2) {
+	public static void deleteStall(ArrayList<Stall> stallList2) {
 		viewStalls(stallList2);
 		String stallID = Helper.readString("Enter ID of stall to delete > ");
 		Boolean isDeleted = doDeleteStall(stallList2, stallID);
