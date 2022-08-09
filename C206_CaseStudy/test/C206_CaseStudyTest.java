@@ -30,6 +30,9 @@ public class C206_CaseStudyTest {
 	private Cart order1;
 	private Cart order2;
 	
+	private Order IngrediantOrder1;
+	private Order IngrediantOrder2;
+	
 //	creating the stallList arraylist 
 	private ArrayList<Stall> StallList;
 	
@@ -63,6 +66,9 @@ public class C206_CaseStudyTest {
 		
 		order1 = new Cart(001,"Chicken Rice",5);
 		order2 = new Cart(002,"Chicken Cutlet",6);
+		
+		IngrediantOrder1 = new Order(1,"Chicken",10);
+		IngrediantOrder2 = new Order(2,"Egg",5);
 		
 		StallList = new ArrayList<Stall>();
 		menuList = new ArrayList<Menu>();
@@ -241,6 +247,9 @@ public class C206_CaseStudyTest {
 	}
 	
 //	End of Cutomer ==========================================================
+	
+// Stall Administrator ==============================================================
+	
 	@Test
 	public void testRetrieveAllStalls() {
 		//Test if Stall array is not null but empty
@@ -331,9 +340,91 @@ public class C206_CaseStudyTest {
 		
 		
 		
-		
-		
 	}
+	
+// End of stall administrator =============================================
+	
+	// Stall Operator ================================================================
+		@Test
+		public void testRetrieveIngrediantOrder() { 
+			// IngredientOrderlist is not null, so that can add a new Order
+			assertNotNull("Test if there is valid Menu arraylist to add to", IngrediantOrderList);
+			
+			//test if the list of IngredientOrder retrieved from the SourceCentre is empty
+			String allOrders = C206_CaseStudy.retrieveAllIngredientOrders(IngrediantOrderList);
+			String testOutput = "";
+			assertEquals("Check that IngredientOrderList has the correct Orders", testOutput, allOrders);
+			
+			//Given an empty list, after adding 2 Orders, test if the size of the list is 2
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder1);
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder2);
+			
+			assertEquals("Test if that IngredientOrder arraylist size is 2?", 2, IngrediantOrderList.size());
+			
+			//test if the expected output string same as the list of Orders retrieved from the SourceCentre
+			allOrders = C206_CaseStudy.retrieveAllIngredientOrders(IngrediantOrderList);
+			
+			testOutput = String.format("%-10d %-20s %-20d\n", 1,"Chicken", 10);
+			
+				
+			assertEquals("Check that IngredientOrderList has the correct Orders ", testOutput, allOrders);
+		}
+		@Test
+		public void testAddIngredientOrder() { 
+			// IngredientOrderlist is not null, so that can add a new Order
+			assertNotNull("Test if there is valid Menu arraylist to add to", IngrediantOrderList);
+					
+			//Given an empty list, after adding 1 Order, the size of the list is 1
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder1);		
+			assertEquals("Test if that IngrediantOrder arraylist size is 1?", 1, IngrediantOrderList.size());
+			assertSame("Check that Order is added", IngrediantOrder1, IngrediantOrderList.get(0));
+
+					
+			//Add another Order. test The size of the list is 2?
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder2);
+			assertEquals("Test that IngredientOrder arraylist size is 2?", 2, IngrediantOrderList.size());
+			assertSame("Check that Order is added", IngrediantOrder2, IngrediantOrderList.get(1));
+
+		}
+		@Test
+		public void testDeleteIngredientOrder() { 
+			// IngrediantOrder list is not null, such that a List is available to delete from. 
+			assertNotNull("Check if there is Menu arraylist to delete from", menuList);
+			//adding one Order into the arraylist for deletion
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder1);
+			assertEquals("Test if that IngrediantOrder arraylist size is 1?", 1, IngrediantOrderList.size());
+					
+			// deleting the order from the arraylist
+			C206_CaseStudy.deleteIngrediantOrder(IngrediantOrderList, 1);
+			assertNotEquals("Test if that IngrediantOrder arraylist size is not equals to 1", 0, IngrediantOrderList.size());
+					
+			boolean exist = false;
+			for(Order O : IngrediantOrderList) {
+				if(O.getOrderID() == 1) {
+					exist = true;
+				}
+			}
+			
+			assertFalse(exist);
+			//adding two orders into the arraylist
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder1);
+			C206_CaseStudy.addIngredientOrder(IngrediantOrderList, IngrediantOrder2);
+			assertEquals("Test that IngredientOrder arraylist size is 2?", 2, IngrediantOrderList.size());
+					
+			// deleting the order from the arraylist
+			C206_CaseStudy.deleteIngrediantOrder(IngrediantOrderList, 1);
+			assertNotEquals("Test if that Ingrediant arraylist size is not 2", 2, IngrediantOrderList.size());
+					
+			exist = false;
+			for(Order O : IngrediantOrderList) {
+				if(O.getOrderID() == 1)  {
+					exist = true;
+				}
+			}
+					
+			assertFalse(exist);
+		}
+	// end of StallOperator tests =========================
 	
 	
 	@After

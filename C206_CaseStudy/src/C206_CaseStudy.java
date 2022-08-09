@@ -21,9 +21,9 @@ public class C206_CaseStudy {
 	{
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
-		//Cs.loadMenuList();
-		// Cs.cutomerStart();
-		//Cs.loadOrders();
+		Cs.loadMenuList();
+		//Cs.cutomerStart();
+		Cs.loadOrders();
 		Cs.start();
 	}
 	
@@ -94,34 +94,35 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 	}
 	
-	private void start()
-	{
-		CanteenAdminMenu();
-		int option = Helper.readInt("Enter your option > ");
-		while(option != 4) {
-			if (option == 1) {
-				C206_CaseStudy.viewStalls(stallList);
-			}
-			else if (option == 2) {
-				Stall newStall = inputStall();
-				C206_CaseStudy.addNewStalls(stallList, newStall);
-			}
-			else if(option == 3) {
-				C206_CaseStudy.deleteStall(stallList);
-			}
-			else {
-				System.out.println("Invaild option");
-			}
-			CanteenAdminMenu();
-			option = Helper.readInt("Enter your option > ");
-		}
-		
-		
-		
-		System.out.println("Bye bye");
-		
-	}
-	/*private void start() { 
+//	private void start()
+//	{
+//		CanteenAdminMenu();
+//		int option = Helper.readInt("Enter your option > ");
+//		while(option != 4) {
+//			if (option == 1) {
+//				C206_CaseStudy.viewStalls(stallList);
+//			}
+//			else if (option == 2) {
+//				Stall newStall = inputStall();
+//				C206_CaseStudy.addNewStalls(stallList, newStall);
+//			}
+//			else if(option == 3) {
+//				C206_CaseStudy.deleteStall(stallList);
+//			}
+//			else {
+//				System.out.println("Invaild option");
+//			}
+//			CanteenAdminMenu();
+//			option = Helper.readInt("Enter your option > ");
+//		}
+//		
+//		
+//		
+//		System.out.println("Bye bye");
+//		
+//	}
+	
+	private void start() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
 		while(option != 4) { 
@@ -145,7 +146,7 @@ public class C206_CaseStudy {
 			CanteenAdminFoodMenu();
 			option = Helper.readInt("Enter option number > ");
 		}
-	}*/
+	}
 	
 //  CUSTOMER CODE====================================================================
 	
@@ -430,77 +431,82 @@ public class C206_CaseStudy {
 	
 //Stall operator Code-----------------------------------------------------------------------------------------------
 
-/*private void start() { 
-StallOperatorMenu()
-int option = Helper.readInt("Enter option number > ");
-while(option != 5) { 
-	if (option == 1) {
-		viewIngrediantOrder()
-	}
-	else if (option == 2) {
-		AddIngredientOrder()
-	}
-	else if(option == 3) {
-		DeleteIngrediantOrder()
-	}
-	else {
-		System.out.println("Invaild option");
-	}
-	StallOperatorMenu()
-	option = Helper.readInt("Enter option number > ");
-}
-}*/
-	private String AddIngredientOrder()
-	{
-		boolean isAdd = false;
-		String Message = "Order was not added successfully.";
-		int OrderID = Helper.readInt("Enter amount of ingrediant");
-		String Name = Helper.readString("Enter ingrediant Name");
-		double getPrice = Helper.readDouble("Enter ingrediant price");
-			IngrediantOrderList.add(new Order(OrderID, Name, getPrice));
-				isAdd = true;
-			
-		
-		
-		if(isAdd == true)
-		{
-			Message = "Order was added successfully.";
+	/*private void start() {
+	
+	StallOperatorMenu();
+	int option = Helper.readInt("Enter your option > ");
+	while(option != 4) {
+		if (option == 1) {
+			viewIngrediantOrder();
 		}
-		
-		return Message;
-		
+		else if (option == 2) {
+			Order newOrder = InputIngredientOrder();
+			addIngredientOrder(IngrediantOrderList, newOrder);
+		}
+		else if(option == 3) {
+			int OrderID = inputOrderID();
+			deleteIngrediantOrder(IngrediantOrderList, OrderID);
+		}
+		else if(option == 4) {
+			System.out.println("Bye");
+		}else {
+			System.out.println("Invaild option");
+		}
+		StallOperatorMenu();
+	    option = Helper.readInt("Enter option number > ");
+	
+	}
+	}*/
+
+	
+	public static Order InputIngredientOrder()
+	{
+		int OrderID = Helper.readInt("Enter Order ID> ");
+		String Name = Helper.readString("Enter ingrediant Name> ");
+		double getPrice = Helper.readDouble("Enter ingrediant price> ");
+		Order ingrediantorder = new Order(OrderID, Name, getPrice);
+		return ingrediantorder;
+	}
+	public static int inputOrderID(){
+		int OrderID = Helper.readInt("Enter Order ID> ");
+		return OrderID;
+	}
+	public static void addIngredientOrder(ArrayList<Order> Order, Order order) {
+		Order.add(order);
+		System.out.println("Order added.");
 	}
 	private void viewIngrediantOrder()
 	{
 		String output = "";
 		output += String.format("%-20s%-20s%s\n", "ORDER NUMBER", "INGREDIANT NAME", "ORDER PRICE");
-		for(int i = 0; i < IngrediantOrderList.size(); i++) {
-			if (IngrediantOrderList.get(i) != null) {
-				output += String.format("%-20s%-20s%s\n", IngrediantOrderList.get(i).getOrderID(), IngrediantOrderList.get(i).getName(), IngrediantOrderList.get(i).getPrice());
+		for(Order i : IngrediantOrderList) {
+			if (i != null) {
+				output += String.format("%-20s%-20s%s\n", i.getOrderID(), i.getName(), i.getPrice());
 			}
 
 		}
 		System.out.println(output);
 	}
-	private String deleteIngrediantOrder() {
-		
-		viewIngrediantOrder();
-		boolean isDeleted = false;
-		String Message = "Order was not deleted.";
-		int OrderID = Helper.readInt("Enter ID of Order to delete > ");
-		for(int i = 0; i < IngrediantOrderList.size(); i++) {
-			if ((IngrediantOrderList.get(i) != null) && (IngrediantOrderList.get(i).getOrderID() == OrderID)) 
+	public static void deleteIngrediantOrder(ArrayList<Order> Order, int order) {
+		for (int i = 0; i < Order.size(); i++) 
+		{
+			if(Order.get(i).getOrderID() == order)
 			{
-				IngrediantOrderList.remove(i);
-				isDeleted = true;
+				Order.remove(i);
 			}
 		}
-		if(isDeleted == true)
+		System.out.println("Order deleted.");
+	}
+	public static String retrieveAllIngredientOrders(ArrayList<Order> Order)
+	{
+		String output = "";
+		
+		for (int i = 0; i < Order.size(); i++) 
 		{
-			Message = "Order was deleted successfully.";
+			output += String.format("%-10d %-20s %-20d\n", i + 1, Order.get(i).getOrderID(),Order.get(i).getName() ,Order.get(i).getPrice());
 		}
 		
-		return Message;
+		return output;
 	}
 	
 }
