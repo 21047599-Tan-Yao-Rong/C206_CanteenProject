@@ -35,11 +35,11 @@ public class C206_CaseStudy {
 	
 	private void loadStallList()
 	{
-		stallList.add(new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15)));
-		stallList.add(new Stall("S2", "Chicken Rice Store", LocalDate.of(2018, 5, 18)));
-		stallList.add(new Stall("S3", "Western Cuisine", LocalDate.of(2022, 12, 12)));
-		stallList.add(new Stall("S4", "Japanese Cuisine", LocalDate.of(2023, 7, 13)));
-		stallList.add(new Stall("S5", "Korean Cuisine", LocalDate.of(2016, 8, 14)));
+		stallList.add(new Stall("S1", "Drink Store", LocalDate.of(2023, 4, 15)));
+		stallList.add(new Stall("S2", "Chicken Rice Store", LocalDate.of(2024, 5, 18)));
+		stallList.add(new Stall("S3", "Western Cuisine", LocalDate.of(2023, 12, 12)));
+		stallList.add(new Stall("S4", "Japanese Cuisine", LocalDate.of(2023, 11, 13)));
+		stallList.add(new Stall("S5", "Korean Cuisine", LocalDate.of(2024, 8, 14)));
 	}
 	private void loadIngrediantOrders() 
 	{
@@ -291,8 +291,9 @@ public class C206_CaseStudy {
 	
 	public static void addNewStalls(ArrayList<Stall> stallList2, Stall newStall) {
 		
-		boolean stallAdded = false;
 		boolean hasSameID = false;
+		boolean afterCurrentDate = newStall.getOperationDate().isAfter(LocalDate.now());
+		
 		for(int i = 0;i<stallList2.size();i++) {
 			
 			if (stallList2.get(i).getID().equals(newStall.getID())) {
@@ -300,15 +301,19 @@ public class C206_CaseStudy {
 			}
 		}
 		
-		if (stallList2.size() < 10 && hasSameID == false) {
+		if (stallList2.size() < 10 && hasSameID == false && afterCurrentDate == true) {
 			
 			stallList2.add(newStall);
 			
 			System.out.println(newStall.getName() + " has sucessfully been added");
 		}
 		
-		else if(hasSameID == true) {
+		else if(hasSameID == true && afterCurrentDate == true) {
 			System.out.println("ERROR! Duplicate stall ID ");
+		}
+		
+		else if(hasSameID == false && afterCurrentDate == false) {
+			System.out.println("The operation date must be before today's date!");
 		}
 		else {
 			System.out.println("The canteen is full!");
@@ -349,8 +354,8 @@ public class C206_CaseStudy {
 		
 		boolean isDeleted = false;
 		
-		for(int i = 0;i<10;i++) {
-			if ((stallList2.get(i) != null) && (stallList2.get(i).getID().equalsIgnoreCase(stallID))) {
+		for(int i = 0;i<stallList2.size();i++) {
+			if ( (stallList2.get(i).getID().equalsIgnoreCase(stallID))) {
 				stallList2.remove(i);
 				isDeleted= true;
 				

@@ -12,6 +12,16 @@ public class C206_CaseStudyTest {
 	
 	private Stall Stall1;
 	private Stall Stall2;
+	private Stall Stall3;
+	private Stall Stall4;
+	private Stall Stall5;
+	private Stall Stall6;
+	private Stall Stall7;
+	private Stall Stall8;
+	private Stall Stall9;
+	private Stall Stall10;
+	private Stall Stall11;
+
 	
 	private Menu menuStalla1;
 	private Menu menuStalla2;
@@ -35,8 +45,17 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp() throws Exception 
 	{
-		Stall1 = new Stall("S1", "Drink Store", LocalDate.of(2017, 4, 15));
-		Stall2 = new Stall("S2", "Chicken rice store", LocalDate.of(2018, 11, 14));
+		Stall1 = new Stall("S1", "Drink Store", LocalDate.of(2023, 4, 15));
+		Stall2 = new Stall("S2", "Chicken Rice Store", LocalDate.of(2024, 5, 18));
+		Stall3 = new Stall("S3", "Western Cuisine", LocalDate.of(2023, 12, 12));
+		Stall4 = new Stall("S4", "Japanese Cuisine", LocalDate.of(2023, 11, 13));
+		Stall5 = new Stall("S5", "Korean Cuisine", LocalDate.of(2024, 8, 14));
+		Stall6 = new Stall("S6", "Indian Cuisine", LocalDate.of(20124, 1, 4));
+		Stall7 = new Stall("S7", "Waffle Store", LocalDate.of(2025, 5, 23));
+		Stall8 = new Stall("S8", "Mala Store", LocalDate.of(2024, 9, 1));
+		Stall9 = new Stall("S9", "Noodle Store", LocalDate.of(2026, 7, 17));
+		Stall10 = new Stall("S10", "Muslim Store", LocalDate.of(2023, 10, 27));
+		Stall11 = new Stall("S11", "French Cuisine", LocalDate.of(2023, 12, 16));
 		menuStalla1 = new Menu(001,"S1", "Chicken Rice",5);
 		menuStalla2 = new Menu(002,"S1", "Chicken Cutlet",6);
 		
@@ -223,7 +242,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testRetrieveAllStalls() {
 		//Test if Stall array is not null but empty -boundary
-		assertNotNull("Test if there is valid Stall array to retrieve item", StallList);
+		assertNotNull("Test if there is valid Stall arrayList to retrieve item", StallList);
 		
 		//Test if the stalls retrieved from the stall array is empty - boundary
 		String allStalls = C206_CaseStudy.retrieveAllStalls(StallList); 
@@ -237,10 +256,61 @@ public class C206_CaseStudyTest {
 		
 		//test if the expected output string same as the stall array of stalls retrieved
 		allStalls = C206_CaseStudy.retrieveAllStalls(StallList);
-		testOutput += String.format("%-20s%-20s%s\n", "S1", "Drink Store", "2017-04-15");
-		testOutput += String.format("%-20s%-20s%s\n", "S2", "Chicken rice store", "2018-11-14");
+		testOutput += String.format("%-20s%-20s%s\n", "S1", "Drink Store", "2023-04-15");
+		testOutput += String.format("%-20s%-20s%s\n", "S2", "Chicken Rice Store", "2024-05-18");
 		
 		assertEquals("Test that the data format displayed is correct for view stall list", testOutput, allStalls);
+		
+	}
+	
+	@Test
+	public void testAddStalls() {
+		
+		//Test that stall list is not null , so that a new stall can be added
+		assertNotNull("Test if there is valid stall arrayList to add to", StallList);
+		
+		//Given an empty stall list, after adding 1 stall, the size of the stall list is 1
+		C206_CaseStudy.addNewStalls(StallList, Stall1);
+		assertEquals("Test if the stall arraylist size is 1?", 1 , StallList.size());
+		
+		//Test that the item that was added is the same as the first item in the stall list
+		assertSame("Test that Camorder is added same as 1st item of the list?", Stall1, StallList.get(0));
+		
+		//Add another stall, test that the size of stall list is 2?
+		C206_CaseStudy.addNewStalls(StallList, Stall2);
+		assertEquals("Test if the stall arraylist size is 2?", 2 , StallList.size());
+		
+		//Test that the stall that was added is the same as the second stall in the stall list
+		assertSame("Test that Camorder is added same as 1st item of the list?", Stall2, StallList.get(1));
+		
+		//Test that the stalls being added with similar stall ID as the stalls in the stall list will not be added
+		C206_CaseStudy.addNewStalls(StallList, Stall1);
+		assertEquals("Test if the stall arraylist size is 2 as duplicate stalls is not added into the stall list", 2 , StallList.size());
+		
+		
+		
+		//Test that when 8 stalls are added the size of the stall list is 10
+
+		C206_CaseStudy.addNewStalls(StallList, Stall3);
+		C206_CaseStudy.addNewStalls(StallList, Stall4);
+		C206_CaseStudy.addNewStalls(StallList, Stall5);
+		C206_CaseStudy.addNewStalls(StallList, Stall6);
+		C206_CaseStudy.addNewStalls(StallList, Stall7);
+		C206_CaseStudy.addNewStalls(StallList, Stall8);
+		C206_CaseStudy.addNewStalls(StallList, Stall9);
+		C206_CaseStudy.addNewStalls(StallList, Stall10);
+		assertEquals("Test if the stall arraylist size is 10?", 10 , StallList.size());
+			
+		//Test when there is 10 stall in the stall arraylist, the 11th stall added will not exist in the stall arraylist
+		C206_CaseStudy.addNewStalls(StallList, Stall11);
+		assertEquals("Test if the stall arraylist size is still 10 after adding the 11th stall?", 10 , StallList.size());
+		
+		
+	
+	}
+	
+	@Test
+	public void testDeleteStalls() {
 		
 	}
 	
@@ -249,6 +319,17 @@ public class C206_CaseStudyTest {
 	public void tearDown() throws Exception 
 	{
 		Stall1 = null;
+		Stall2 = null;
+		Stall3 = null;
+		Stall4 = null;
+		Stall5 = null;
+		Stall6 = null;
+		Stall7 = null;
+		Stall8 = null;
+		Stall9 = null;
+		Stall10 = null;
+		Stall11 = null;
+		
 		menuStalla1 = null;
 		menuStalla2 = null;
 		
