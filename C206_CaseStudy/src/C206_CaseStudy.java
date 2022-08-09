@@ -381,53 +381,66 @@ public class C206_CaseStudy {
 	}
 	
 // Canteen Admin codes (Menu)====================================================================================
-	public static String retrieveMenu(ArrayList<Menu> menuList)
-	{
-		String ID = Helper.readString("Enter the stall ID > ");
-		String output = "";
-		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
-		for(Menu M : menuList){
-			if(ID.equals(M.getStallID())){
-				output += String.format("%-20s%-20s%d\n", M.getNumber(), M.getName(), M.getPrice());
-			}	
-		}
-		return output;
-	}
+	   public static String retrieveMenu(ArrayList<Menu> menuList){
+	        String output = "";
+	        for (Menu M : menuList) {
+	            output += String.format("%-20d %-20s %-20s %-20d\n", M.getNumber(), M.getStallID(), M.getName(), M.getPrice());
+	        }
+	        return output;
+	    }
 
-	private static void viewMenu(ArrayList<Menu> menuList) {
-		String output = String.format("%-20s %-20s %-20s %-20s\n", "FOOD NUMBER", "STALL ID", "FOOD ITEM NAME", "PRICE");
-		output += retrieveMenu(menuList);
-		System.out.println(output);
-	}
 
-	public static Menu inputFoodItem() {
-		int number = Helper.readInt("Enter Food Number of new food item > ");
-		String stallID = Helper.readString("Enter Stall ID of new food item > ");
-		String name = Helper.readString("Enter name of new food item > ");
-		int price = Helper.readInt("Enter price > ");
 
-		Menu foodItem = new Menu(number, stallID, name, price);
-		return foodItem;
-		
-	}
-	public static void addFoodItem(ArrayList<Menu> menuList, Menu foodItem) {
-		menuList.add(foodItem);
-		System.out.println("Food Item added!");
+	   private static void viewMenu(ArrayList<Menu> menuList) {
+	        String output = String.format("%-20s %-20s %-20s %-20s\n", "FOOD NUMBER", "STALL ID", "FOOD ITEM NAME", "PRICE");
+	        output += retrieveMenu(menuList);
+	        System.out.println(output);
+	    }
 
-	}
-	public static int inputFoodNum() {
-		int foodNumber = Helper.readInt("Enter the food Number you want to delete > ");
-		return foodNumber;
-	}
 
-	public static void deleteFoodItem(ArrayList<Menu> menuList, int foodNumber) {
-		for (int i = 0; i < menuList.size(); i++) { 
-			if (i == foodNumber) { 
-				menuList.remove(foodNumber);
-			}
-			System.out.println("Food Item deleted successfully!");
-		}
-	}
+
+	   public static Menu inputFoodItem() {
+	        int number = Helper.readInt("Enter Food Number of new food item > ");
+	        String stallID = Helper.readString("Enter Stall ID of new food item > ");
+	        String name = Helper.readString("Enter name of new food item > ");
+	        int price = Helper.readInt("Enter price > ");
+
+
+
+	       Menu foodItem = new Menu(number, stallID, name, price);
+	        return foodItem;
+	        
+	    }
+	    public static void addFoodItem(ArrayList<Menu> menuList, Menu foodItem) {
+	        menuList.add(foodItem);
+	        System.out.println("Food Item added!");
+
+
+
+	   }
+	    public static int inputFoodNum() {
+	        int foodNumber = Helper.readInt("Enter the food Number you want to delete > ");
+	        return foodNumber;
+	    }
+
+
+
+	   public static void deleteFoodItem(ArrayList<Menu> menuList, int foodNumber) {
+	        boolean isDeleted = false;
+	        for (int i = 0; i < menuList.size(); i++) {
+	            if (menuList.get(i).getNumber() == foodNumber) {
+	                menuList.remove(i);
+	                isDeleted = true;
+	                
+	            }
+	        }
+	        if (isDeleted == true) {
+	            System.out.println("Food Item deleted successfully!");
+	        }
+	        else {
+	            System.out.println("Food Item not deleted!");
+	        }
+	    }
 	
 //Stall operator Code-----------------------------------------------------------------------------------------------
 

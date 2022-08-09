@@ -62,7 +62,7 @@ public class C206_CaseStudyTest {
 		Stall11 = new Stall("S11", "French Cuisine", LocalDate.of(2023, 12, 16));
 		StallLateDate = new Stall("S63", "Chinese Cuisine", LocalDate.of(2019, 11, 21));
 		menuStalla1 = new Menu(001,"S1", "Chicken Rice",5);
-		menuStalla2 = new Menu(002,"S1", "Chicken Cutlet",6);
+		 menuStalla2 = new Menu(2,"S2", "Chicken Cutlet",6);
 		
 		order1 = new Cart(001,"Chicken Rice",5);
 		order2 = new Cart(002,"Chicken Cutlet",6);
@@ -75,83 +75,84 @@ public class C206_CaseStudyTest {
 		IngrediantOrderList = new ArrayList<Order>();
 		cart = new ArrayList<Cart>();
 	}
+    @Test
+    public void testRetrieveMenu() {
+        // Test if menuList is not null but empty, so that can add a new item
+        assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
+        
+        //test if the list of food items retrieved from the menuList is empty
+        String allMenu = C206_CaseStudy.retrieveMenu(menuList);
+        String testOutput = "";
+        assertEquals("Check that Menu has the correct food items", testOutput, allMenu);
+        
+        //Given an empty list, after adding 2 food items, test if the size of the list is 2
+        C206_CaseStudy.addFoodItem(menuList, menuStalla1);
+        C206_CaseStudy.addFoodItem(menuList, menuStalla2);
+        assertEquals("Test if that Menu arraylist size is 2?", 2, menuList.size());
+        
+        //test if the expected output string same as the list of food items retrieved from the menuList
+        allMenu = C206_CaseStudy.retrieveMenu(menuList);
+        
+        testOutput = String.format("%-20d %-20s %-20s %-20d\n", 1, "S1", "Chicken Rice", 5);
+        testOutput += String.format("%-20d %-20s %-20s %-20d\n", 2, "S2","Chicken Cutlet",6);
+            
+        assertEquals("Check that Menu has the correct food items ", testOutput, allMenu);
+    }
 	@Test
-	public void testRetrieveMenu() { 
-		// Test if Menu list is not null but empty, so that can add a new item
-		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
-		
-		//test if the list of food items retrieved from the SourceCentre is empty
-		String allMenu = C206_CaseStudy.retrieveMenu(menuList);
-		String testOutput = "";
-		assertEquals("Check that Menu has the correct food items", testOutput, allMenu);
-		
-		//Given an empty list, after adding 2 items, test if the size of the list is 2
-		C206_CaseStudy.addFoodItem(menuList, menuStalla1);
-		C206_CaseStudy.addFoodItem(menuList, menuStalla2);
-		assertEquals("Test if that Menu arraylist size is 2?", 2, menuList.size());
-		
-		//test if the expected output string same as the list of food items retrieved from the SourceCentre
-		allMenu = C206_CaseStudy.retrieveMenu(menuList);
-		
-		testOutput = String.format("%-10d %-20s %-20d\n", 1,"Chicken Rice", 5);
-		testOutput += String.format("%-10d %-20s %-20d\n", 2, "chicken cultlet",6);
-			
-		assertEquals("Check that Menu has the correct food items ", testOutput, allMenu);
-	}
-	@Test
-	public void testAddFoodItem() { 
-		// Item list is not null, so that can add a new item
-		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
-				
-		//Given an empty list, after adding 1 item, the size of the list is 1
-		C206_CaseStudy.addFoodItem(menuList, menuStalla1);		
-		assertEquals("Test if that Menu arraylist size is 1?", 1, menuList.size());
-		assertSame("Check that Order is added", menuStalla1, menuList.get(0));
-
-				
-		//Add another item. test The size of the list is 2?
-		C206_CaseStudy.addFoodItem(menuList, menuStalla2);
-		assertEquals("Test that Menu arraylist size is 2?", 2, menuList.size());
-		assertSame("Check that Order is added", menuStalla2, menuList.get(1));
-
-	}
-	@Test
-	public void testDeleteFoodItem() { 
-		// Menu list is not null, such that a Menu is available to delete from. 
-		assertNotNull("Check if there is Menu arraylist to delete from", menuList);
-		//adding one food item into the arraylist for deletion
-		C206_CaseStudy.addFoodItem(menuList, menuStalla1);
-		assertEquals("Test if that Menu arraylist size is 1?", 1, menuList.size());
-				
-		// deleting the order from the arraylist
-		C206_CaseStudy.deleteFoodItem(menuList, 001);
-		assertNotEquals("Test if that Menu arraylist size is not equals to 1", 0, menuList.size());
-				
-		boolean exist = false;
-		for(Menu F : menuList) {
-			if(F.getNumber() == 001) {
-				exist = true;
-			}
-		}
-		assertFalse(exist);
-		//adding two orders into the arraylist
-		C206_CaseStudy.addFoodItem(menuList, menuStalla1);
-		C206_CaseStudy.addFoodItem(menuList, menuStalla2);
-		assertEquals("Test if that Menu arraylist size is 2?", 2, menuList.size());
-				
-		// deleting the order from the arraylist
-		C206_CaseStudy.deleteFoodItem(menuList, 001);
-		assertNotEquals("Test if that Menu arraylist size is not 2", 2, menuList.size());
-				
-		exist = false;
-		for(Menu F : menuList) {
-			if(F.getNumber() == 001)  {
-				exist = true;
-			}
-		}
-				
-		assertFalse(exist);
-	}
+    public void testAddFoodItem() {
+        //menuList is not null, such that there is a menuList to add to.
+        assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
+                
+        //Given an empty list, after adding 1 item, the size of the list is 1
+        //The foodItem just added is as same as the first item of menuList
+        C206_CaseStudy.addFoodItem(menuList, menuStalla1);        
+        assertEquals("Test if that Menu arraylist size is 1?", 1, menuList.size());
+        assertSame("Check that Order is added", menuStalla1, menuList.get(0));
+           
+        //Add another food item. test that the size of menuList is 2?
+        //The foodItem just added is as same as the second item of menuList.
+        C206_CaseStudy.addFoodItem(menuList, menuStalla2);
+        assertEquals("Test that Menu arraylist size is 2?", 2, menuList.size());
+        assertSame("Check that Order is added", menuStalla2, menuList.get(1));
+    }
+    @Test
+    public void testDeleteFoodItem() {
+        //menuList is not null, such that a menuList is available to delete from.
+        assertNotNull("Check if there is Menu arraylist to delete from", menuList);
+        
+        //adding one food item into the menuList for deletion
+        C206_CaseStudy.addFoodItem(menuList, menuStalla1);
+        assertEquals("Test if that Menu arraylist size is 1?", 1, menuList.size());
+                
+        // deleting the food item from the menuList
+        C206_CaseStudy.deleteFoodItem(menuList, menuStalla1.getNumber());
+        assertNotEquals("Test if that Menu arraylist size is not equals to 1", 1, menuList.size());
+                
+        boolean exist = false;
+        for(Menu F : menuList) {
+            if(F.getNumber() == 001) {
+                exist = true;
+            }
+        }
+        assertFalse(exist);
+        
+        //adding two food items into the menuList
+        C206_CaseStudy.addFoodItem(menuList, menuStalla1);
+        C206_CaseStudy.addFoodItem(menuList, menuStalla2);
+        assertEquals("Test if that Menu arraylist size is 2?", 2, menuList.size());
+                
+        // deleting the a food item from the menuList
+        C206_CaseStudy.deleteFoodItem(menuList, menuStalla1.getNumber());
+        assertNotEquals("Test if that Menu arraylist size is not 2", 2, menuList.size());
+                
+        exist = false;
+        for(Menu F : menuList) {
+            if(F.getNumber() == 001)  {
+                exist = true;
+            }
+        }
+        assertFalse(exist);
+    }
 //	Cutomer ==========================================================
 	
 	
@@ -240,7 +241,7 @@ public class C206_CaseStudyTest {
 		allOrders = C206_CaseStudy.retrieveAllOrders(cart);
 		
 		testOutput = String.format("%-10d %-20s %-20d\n", 1,"Chicken Rice", 5);
-		testOutput += String.format("%-10d %-20s %-20d\n", 2, "chicken cultlet",6);
+		testOutput += String.format("%-10d %-20s %-20d\n", 2, "Chicken Cutlet",6);
 			
 		assertEquals("Check that viewAllOrders", testOutput, allOrders);
 		
@@ -285,14 +286,14 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if the stall arraylist size is 1?", 1 , StallList.size());
 		
 		//Test that the item that was added is the same as the first item in the stall list
-		assertSame("Test that Camorder is added same as 1st item of the list?", Stall1, StallList.get(0));
+		assertSame("Test that stall added same as 1st item of the stall list?", Stall1, StallList.get(0));
 		
 		//Add another stall, test that the size of stall list is 2?
 		C206_CaseStudy.addNewStalls(StallList, Stall2);
 		assertEquals("Test if the stall arraylist size is 2?", 2 , StallList.size());
 		
 		//Test that the stall that was added is the same as the second stall in the stall list
-		assertSame("Test that Camorder is added same as 1st item of the list?", Stall2, StallList.get(1));
+		assertSame("Test that stall added same as 1st item of the list?", Stall2, StallList.get(1));
 		
 		//Test that the stalls being added with similar stall ID as the stalls in the stall list will not be added
 		C206_CaseStudy.addNewStalls(StallList, Stall1);
