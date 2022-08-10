@@ -22,6 +22,8 @@ public class C206_CaseStudy {
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
 		Cs.loadMenuList();
+		Cs.loadIngrediantOrders();
+		Cs.loadOrders();
 		Cs.mainStart();
 	}
 	
