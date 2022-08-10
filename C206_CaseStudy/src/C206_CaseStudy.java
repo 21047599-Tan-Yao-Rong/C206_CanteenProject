@@ -22,9 +22,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy Cs = new C206_CaseStudy();
 		Cs.loadStallList();
 		Cs.loadMenuList();
-		//Cs.cutomerStart();
-		Cs.loadOrders();
-		Cs.start();
+		Cs.mainStart();
 	}
 	
 	public static void setHeader(String header) {
@@ -73,9 +71,10 @@ public class C206_CaseStudy {
 	private void CanteenAdminMenu() {
 		Helper.line(50, "=");
 		System.out.println("Option 1: View all stalls");
-		System.out.println("Option 2: Add new stalls");
-		System.out.println("Option 3: Remove Stall");
-		System.out.println("Option 4: Quit");
+		System.out.println("Option 2: View existing stall");
+		System.out.println("Option 3: Add new stalls");
+		System.out.println("Option 4: Remove Stall");
+		System.out.println("Option 5: Quit");
 		Helper.line(50, "=");
 	}
 	private void CanteenAdminFoodMenu() { 
@@ -94,35 +93,75 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 	}
 	
-//	private void start()
-//	{
-//		CanteenAdminMenu();
-//		int option = Helper.readInt("Enter your option > ");
-//		while(option != 4) {
-//			if (option == 1) {
-//				C206_CaseStudy.viewStalls(stallList);
-//			}
-//			else if (option == 2) {
-//				Stall newStall = inputStall();
-//				C206_CaseStudy.addNewStalls(stallList, newStall);
-//			}
-//			else if(option == 3) {
-//				C206_CaseStudy.deleteStall(stallList);
-//			}
-//			else {
-//				System.out.println("Invaild option");
-//			}
-//			CanteenAdminMenu();
-//			option = Helper.readInt("Enter your option > ");
-//		}
-//		
-//		
-//		
-//		System.out.println("Bye bye");
-//		
-//	}
+	private void optionsMenu() { 
+		Helper.line(50, "=");
+		System.out.println("Option 1: As Stall Administrator to manage stalls");
+		System.out.println("Option 2: As Stall Administrator to manage food menu");
+		System.out.println("Option 3: As Stall operator");
+		System.out.println("Option 4: As Customer");
+		System.out.println("Option 5: Quit");
+		Helper.line(50, "=");
+	}
 	
-	private void start() { 
+	
+	private void mainStart() {
+		optionsMenu();
+		int option = Helper.readInt("Enter your role > ");
+		
+		while (option != 5) {
+			if (option == 1) {
+				start1();
+			}
+			else if(option == 2) {
+				start2();
+			}
+			
+			else if (option == 3) {
+				start4();
+			}
+			
+			else if(option == 4) {
+				cutomerStart();
+			}
+			optionsMenu();
+			option = Helper.readInt("Enter your role > ");
+		}
+
+	}
+	
+	private void start1()
+	{
+		CanteenAdminMenu();
+		int option = Helper.readInt("Enter your option > ");
+		while(option != 5) {
+			if (option == 1) {
+				C206_CaseStudy.viewStalls(stallList);
+			}
+			else if (option == 2) {
+
+				C206_CaseStudy.viewSelectedStall(stallList);
+			}
+			else if (option == 3) {
+				Stall newStall = inputStall();
+				C206_CaseStudy.addNewStalls(stallList, newStall);
+			}
+			else if(option == 4) {
+				C206_CaseStudy.deleteStall(stallList);
+			}
+			else {
+				System.out.println("Invaild option");
+			}
+			CanteenAdminMenu();
+			option = Helper.readInt("Enter your option > ");
+		}
+		
+		
+		
+		System.out.println("Bye bye");
+		
+	}
+	
+	private void start2() { 
 		CanteenAdminFoodMenu();
 		int option = Helper.readInt("Enter option number > ");
 		while(option != 4) { 
@@ -150,41 +189,41 @@ public class C206_CaseStudy {
 	
 //  CUSTOMER CODE====================================================================
 	
-//	private void cutomerStart() { 
-//		CustomerMenu();
-//		int option = Helper.readInt("Enter option number > ");
-//		while(option != 6) 
-//		{ 
-//			if (option == 1) 
-//			{
-//				viewStalls();
-//			}
-//			else if (option == 2) 
-//			{
-//				viewMenu();
-//			}
-//			else if(option == 3) 
-//			{
-//				Cart orders = inputOrder();
-//				C206_CaseStudy.addOrder(cart, orders);
-//			}
-//			else if(option == 4) 
-//			{
-//				C206_CaseStudy.viewAllOrders(cart);
-//			}
-//			else if(option == 5) 
-//			{
-//				int FoodNumber = inputFoodNumber();
-//				C206_CaseStudy.deleteOrder(cart, FoodNumber);
-//			}
-//			else {
-//				System.out.println("Invaild option");	
-//			}
-//			CustomerMenu();
-//			option = Helper.readInt("Enter option number > ");
-//		}
-//		System.out.println("Bye");
-//	}
+	private void cutomerStart() { 
+		CustomerMenu();
+		int option = Helper.readInt("Enter option number > ");
+		while(option != 6) 
+		{ 
+			if (option == 1) 
+			{
+				C206_CaseStudy.viewStalls(stallList);
+			}
+			else if (option == 2) 
+			{
+				viewMenu();
+			}
+			else if(option == 3) 
+			{
+				Cart orders = inputOrder();
+				C206_CaseStudy.addOrder(cart, orders);
+			}
+			else if(option == 4) 
+			{
+				C206_CaseStudy.viewAllOrders(cart);
+			}
+			else if(option == 5) 
+			{
+				int FoodNumber = inputFoodNumber();
+				C206_CaseStudy.deleteOrder(cart, FoodNumber);
+			}
+			else {
+				System.out.println("Invaild option");	
+			}
+			CustomerMenu();
+			option = Helper.readInt("Enter option number > ");
+		}
+		System.out.println("Bye");
+	}
 	
 	private void viewMenu()
 	{
@@ -260,23 +299,56 @@ public class C206_CaseStudy {
 	
 //  end of customer code =============================================================================	
 	
-	public static String retrieveAllStalls(ArrayList<Stall> stallList2) {
+	public static String retrieveAllStalls(ArrayList<Stall> stallList) {
 		String output = "";
 		
-		for(int i =0;i<stallList2.size(); i++) {
-			if (stallList2.get(i) != null) {
-				output += String.format("%-20s%-20s%s\n", stallList2.get(i).getID(), stallList2.get(i).getName(), stallList2.get(i).getOperationDate());
+		for(int i =0;i<stallList.size(); i++) {
+			if (stallList.get(i) != null) {
+				output += String.format("%-20s%-20s%s\n", stallList.get(i).getID(), stallList.get(i).getName(), stallList.get(i).getOperationDate());
 			}
 		}
 		return output;
 		
 	}
 	
-	private static void viewStalls(ArrayList<Stall> stallList2)
+	private static void viewStalls(ArrayList<Stall> stallList)
 	{
 		String output = String.format("%-20s%-20s%s\n", "STALL ID", "STALL NAME", "OPERATION DATE");
-		output += retrieveAllStalls(stallList2);
+		output += retrieveAllStalls(stallList);
 		System.out.println(output);
+	}
+	
+
+	
+	public static String retrieveSelectedStall(ArrayList<Stall> stallList, String stallID) {
+		String output = "";
+		boolean stallExist = false;
+		for(int i =0;i<stallList.size(); i++) {
+			if (stallList.get(i).getID().equalsIgnoreCase(stallID)) {
+				output += String.format("%-20s%-20s%s\n", stallList.get(i).getID(), stallList.get(i).getName(), stallList.get(i).getOperationDate());
+				stallExist = true;
+			}
+		}
+		
+		if (stallExist == true) {
+			return output;
+		}
+		else {
+			return null;
+		}	
+	}
+	
+	public static void viewSelectedStall(ArrayList<Stall> stallList) {
+		String stallID = Helper.readString("Enter ID of stall to view information > ");
+		String output = String.format("%-20s%-20s%s\n", "STALL ID", "STALL NAME", "OPERATION DATE");
+		if (retrieveSelectedStall(stallList, stallID) != null) {
+			output += retrieveSelectedStall(stallList, stallID);
+			System.out.println(output);
+		}
+		else {
+			System.out.println("Error stall does not exist!");
+		}
+
 	}
 	
 	public static Stall inputStall() {
@@ -444,7 +516,7 @@ public class C206_CaseStudy {
 	
 //Stall operator Code-----------------------------------------------------------------------------------------------
 
-	/*private void start() {
+	private void start4() {
 	
 	StallOperatorMenu();
 	int option = Helper.readInt("Enter your option > ");
@@ -469,7 +541,7 @@ public class C206_CaseStudy {
 	    option = Helper.readInt("Enter option number > ");
 	
 	}
-	}*/
+	}
 
 	
 	public static Order InputIngredientOrder()
