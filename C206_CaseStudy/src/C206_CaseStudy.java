@@ -178,15 +178,13 @@ public class C206_CaseStudy {
 				int foodNum = inputFoodNum();
 				deleteFoodItem(menuList, foodNum);
 			}
-			else if (option == 4) { 
-				System.out.println("Bye bye");
-			}
 			else {
 				System.out.println("Invaild option");
 			}
 			CanteenAdminFoodMenu();
 			option = Helper.readInt("Enter option number > ");
 		}
+		System.out.println("Bye bye");
 	}
 	
 //  CUSTOMER CODE====================================================================
