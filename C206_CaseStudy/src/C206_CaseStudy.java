@@ -184,7 +184,7 @@ public class C206_CaseStudy {
 			CanteenAdminFoodMenu();
 			option = Helper.readInt("Enter option number > ");
 		}
-		System.out.println("Bye bye");
+		System.out.println("Bye bye!");
 	}
 	
 //  CUSTOMER CODE====================================================================
