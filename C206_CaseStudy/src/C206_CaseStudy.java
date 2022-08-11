@@ -168,7 +168,7 @@ public class C206_CaseStudy {
 		int option = Helper.readInt("Enter option number > ");
 		while(option != 4) { 
 			if (option == 1) {
-				viewMenu();
+				viewMenu(menuList);
 			}
 			else if (option == 2) {
 				Menu foodItem = inputFoodItem();
