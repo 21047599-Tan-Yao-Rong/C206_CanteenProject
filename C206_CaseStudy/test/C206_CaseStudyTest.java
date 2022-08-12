@@ -276,6 +276,27 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
+	public void testViewSelectedStall() {
+		//Test if Stall array is not null but empty
+		assertNotNull("Test if there is valid Stall arrayList to retrieve item", StallList);
+		
+		//Test if the stalls retrieved from the stall array is empty
+		String allStalls = C206_CaseStudy.retrieveAllStalls(StallList); 
+		String testOutput = "";
+		assertEquals("Test that the retrieved stallList is empty?", testOutput, allStalls);
+		
+		//Test that after adding a stall, the stall can be selected is displayed 
+		C206_CaseStudy.addNewStalls(StallList, Stall1);
+		String selectedStall = C206_CaseStudy.retrieveSelectedStall(StallList, "S1");
+		testOutput += String.format("%-20s%-20s%s\n", "S1", "Drink Store", "2023-04-15");
+		assertEquals("Test that the selected stall display is correct", testOutput, selectedStall);
+		
+		//Test that stall non-existing stall will not be retrieved from the stall list
+		String nonExistingStall = C206_CaseStudy.retrieveSelectedStall(StallList, "S22");
+		assertNull("Test that null value is returned when the stall does not exist", nonExistingStall);
+	}
+	
+	@Test
 	public void testAddStalls() {
 		
 		//Test that stall list is not null , so that a new stall can be added
@@ -303,7 +324,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addNewStalls(StallList, StallLateDate);
 		assertEquals("Test if the stall arraylist size is 2 as stall with operational date before today's date will not be added into the stall list", 2 , StallList.size());
 		
-		//Test that when 8 stalls are added the size of the stall list is 10
+		//Add another 8 stalls, test that the size of the stall list is 10
 
 		C206_CaseStudy.addNewStalls(StallList, Stall3);
 		C206_CaseStudy.addNewStalls(StallList, Stall4);
