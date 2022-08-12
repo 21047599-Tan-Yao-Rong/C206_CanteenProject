@@ -201,6 +201,17 @@ public class C206_CaseStudy {
 //	
 //  CUSTOMER CODE====================================================================
 	
+	private void CustomerMenu()
+	{
+		Helper.line(50, "=");
+		System.out.println("Option 1: Add orders");
+		System.out.println("Option 2: View orders ");
+		System.out.println("Option 3: Delete orders ");
+		System.out.println("Option 4: Quit");
+		Helper.line(50, "=");
+		
+	}
+	
 	private void cutomerStart() { 
 		CustomerMenu();
 		int option = Helper.readInt("Enter option number > ");
@@ -227,34 +238,6 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter option number > ");
 		}
 		System.out.println("Bye");
-	}
-	
-	private void CustomerMenu()
-	{
-		Helper.line(50, "=");
-		System.out.println("Option 1: Add orders");
-		System.out.println("Option 2: View orders ");
-		System.out.println("Option 3: Delete orders ");
-		System.out.println("Option 4: Quit");
-		Helper.line(50, "=");
-		
-	}
-	
-	private void viewMenu()
-	{
-		String ID = Helper.readString("Enter the stall ID > ");
-		String output = "";
-		output += String.format("%-20s%-20s%s\n", "FOOD NUMBER", "NAME", "PRICE");
-		for(Menu M : menuList)
-		{
-			if(ID.equals(M.getStallID()))
-			{
-				output += String.format("%-20s%-20s%d\n", M.getNumber(), M.getName(), M.getPrice());
-			}
-			
-		}
-		
-		System.out.println(output);
 	}
 	
 	public static Cart inputOrder() {
