@@ -24,7 +24,7 @@ public class C206_CaseStudy {
 		Cs.loadMenuList();
 		//Cs.cutomerStart();
 		Cs.loadOrders();
-		Cs.start();
+		Cs.cutomerStart();
 	}
 	
 	public static void setHeader(String header) {
@@ -109,79 +109,69 @@ public class C206_CaseStudy {
 //		
 //	}
 	
-	private void start() { 
-		CanteenAdminFoodMenu();
-		int option = Helper.readInt("Enter option number > ");
-		while(option != 4) { 
-			if (option == 1) {
-				viewMenu();
-			}
-			else if (option == 2) {
-				Menu foodItem = inputFoodItem();
-				addFoodItem(menuList, foodItem);
-			}
-			else if(option == 3) {
-				int foodNum = inputFoodNum();
-				deleteFoodItem(menuList, foodNum);
-			}
-			else if (option == 4) { 
-				System.out.println("Bye bye");
-			}
-			else {
-				System.out.println("Invaild option");
-			}
-			CanteenAdminFoodMenu();
-			option = Helper.readInt("Enter option number > ");
-		}
-	}
+//	private void start() { 
+//		CanteenAdminFoodMenu();
+//		int option = Helper.readInt("Enter option number > ");
+//		while(option != 4) { 
+//			if (option == 1) {
+//				viewMenu();
+//			}
+//			else if (option == 2) {
+//				Menu foodItem = inputFoodItem();
+//				addFoodItem(menuList, foodItem);
+//			}
+//			else if(option == 3) {
+//				int foodNum = inputFoodNum();
+//				deleteFoodItem(menuList, foodNum);
+//			}
+//			else if (option == 4) { 
+//				System.out.println("Bye bye");
+//			}
+//			else {
+//				System.out.println("Invaild option");
+//			}
+//			CanteenAdminFoodMenu();
+//			option = Helper.readInt("Enter option number > ");
+//		}
+//	}
 	
 //  CUSTOMER CODE====================================================================
 	
-//	private void cutomerStart() { 
-//		CustomerMenu();
-//		int option = Helper.readInt("Enter option number > ");
-//		while(option != 6) 
-//		{ 
-//			if (option == 1) 
-//			{
-//				viewStalls();
-//			}
-//			else if (option == 2) 
-//			{
-//				viewMenu();
-//			}
-//			else if(option == 3) 
-//			{
-//				Cart orders = inputOrder();
-//				C206_CaseStudy.addOrder(cart, orders);
-//			}
-//			else if(option == 4) 
-//			{
-//				C206_CaseStudy.viewAllOrders(cart);
-//			}
-//			else if(option == 5) 
-//			{
-//				int FoodNumber = inputFoodNumber();
-//				C206_CaseStudy.deleteOrder(cart, FoodNumber);
-//			}
-//			else {
-//				System.out.println("Invaild option");	
-//			}
-//			CustomerMenu();
-//			option = Helper.readInt("Enter option number > ");
-//		}
-//		System.out.println("Bye");
-//	}
+	private void cutomerStart() { 
+		CustomerMenu();
+		int option = Helper.readInt("Enter option number > ");
+		while(option != 4) 
+		{ 
+			if(option == 1) 
+			{
+				Cart orders = inputOrder();
+				C206_CaseStudy.addOrder(cart, orders);
+			}
+			else if(option == 2) 
+			{
+				C206_CaseStudy.viewAllOrders(cart);
+			}
+			else if(option == 3) 
+			{
+				int FoodNumber = inputFoodNumber();
+				C206_CaseStudy.deleteOrder(cart, FoodNumber);
+			}
+			else {
+				System.out.println("Invaild option");	
+			}
+			CustomerMenu();
+			option = Helper.readInt("Enter option number > ");
+		}
+		System.out.println("Bye");
+	}
 	
 	private void CustomerMenu()
 	{
 		Helper.line(50, "=");
-		System.out.println("Option 1: View all stalls");
-		System.out.println("Option 2: View Menu");
-		System.out.println("Option 3: Add orders");
-		System.out.println("Option 4: View orders ");
-		System.out.println("Option 5: Delete orders ");
-		System.out.println("Option 6: Quit");
+		System.out.println("Option 1: Add orders");
+		System.out.println("Option 2: View orders ");
+		System.out.println("Option 3: Delete orders ");
+		System.out.println("Option 4: Quit");
 		Helper.line(50, "=");
 	}
 	
